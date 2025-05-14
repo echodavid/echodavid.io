@@ -42,7 +42,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Ruta confirmada donde están los archivos de build en la rama 'main'
-          path: './docs/browser'
+          path: '.'
 
       - name: Deploy to GitHub Pages
         id: deployment
