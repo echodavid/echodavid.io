@@ -1,0 +1,50 @@
+# .github/workflows/deploy-prebuilt-to-pages.yml
+name: Deploy Pre-Built Content to GitHub Pages from Release Branch
+
+on:
+  # Ejecutar solo en pushes a la rama 'release'
+  push:
+    branches: [ "main" ]
+
+  # Permite ejecutar este workflow manually desde la pestaña Actions en GitHub
+  workflow_dispatch:
+
+# Permisos necesarios para desplegar en GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Permitir solo un despliegue concurrente
+concurrency:
+  group: "pages"
+  cancel-in-progress: false # No cancelar despliegues en progreso
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }} # URL dinámica del sitio desplegado
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 'release' branch
+        # Hace checkout de la rama 'release' que contiene los archivos pre-construidos
+        uses: actions/checkout@v4
+        with:
+          ref: release # Asegura que toma la rama correcta
+
+      - name: Setup GitHub Pages
+        # Configura el entorno para la API de Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact from ./docs/browser
+        # Sube el contenido de la carpeta './docs/browser' como el artefacto para Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Ruta confirmada donde están los archivos de build en la rama 'release'
+          path: './docs/browser'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        # Despliega el artefacto subido en el paso anterior
+        uses: actions/deploy-pages@v4

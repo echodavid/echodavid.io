@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Médico Interactivo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="progress-bar-container">
+            <div class="progress-bar">
+                <div class="progress-step active" data-step="1">1</div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="2">2</div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="3">3</div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="4">4</div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="5">5</div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="6">6</div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="7">7</div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="8">8</div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="9">9</div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="10">10</div>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="11">11</div>
+            </div>
+            <div class="progress-labels">
+                <span>Datos</span>
+                <span>Salud Mujer</span>
+                <span>Emergencias</span>
+                <span>Ant. Madre</span>
+                <span>Ant. Padre</span>
+                <span>Hábitos 1</span>
+                <span>Hábitos 2</span>
+                <span>Hábitos 3</span>
+                <span>Vacunación</span>
+                <span>Hist. Médico</span>
+                <span>Salud Sexual</span>
+            </div>
+        </div>
+
+        <form id="multiPageForm">
+            <div class="form-page active-page" id="page0">
+                <h2>Recopilación de datos para trabajo con IA</h2>
+                <p>
+                    Gracias por tomarte el tiempo para completar este formulario. Tu información es valiosa y nos ayudará a entender mejor tu estado de salud general y antecedentes.
+                </p>
+                <p>
+                    Por favor, responde cada pregunta de la manera más precisa posible. El formulario está dividido en varias secciones para facilitar su llenado.
+                </p>
+                <p>
+                    Puedes usar los botones "Siguiente" y "Anterior" para navegar entre las páginas. Tu progreso se mostrará en la barra superior una vez que comiences a llenar los datos.
+                </p>
+                <p>
+                    Estimamos que te tomará aproximadamente [indicar tiempo estimado, ej: 15-20 minutos] completarlo.
+                </p>
+                <p>
+                    <strong>Confidencialidad:</strong> Tu información será tratada con la debida confidencialidad de acuerdo con las normativas vigentes en México sobre protección de datos personales.
+                </p>
+                <div class="navigation-buttons" style="justify-content: flex-end;"> <button type="button" onclick="nextPage()">Comenzar Formulario</button>
+                </div>
+            </div>
+            <div class="form-page active-page" id="page1">
+                <h2>Página 1: Datos Demográficos</h2>
+                <div class="form-group">
+                    <label>¿Qué edad tiene?</label>
+                    <select id="edad" name="edad" onchange="toggleOtroEdad(this.value)">
+                        <option value="">Seleccione...</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="otro_edad">Otro</option>
+                    </select>
+                    <input type="number" id="edad_otro_valor" name="edad_otro_valor" placeholder="Especifique edad" class="hidden" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="fecha_nacimiento">¿Cuál es su fecha de nacimiento?</label>
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
+                </div>
+                <div class="form-group">
+                    <label>¿Cuál es su sexo?</label>
+                    <select id="sexo" name="sexo">
+                        <option value="">Seleccione...</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="otro_sexo">Otro</option>
+                    </select>
+                    <input type="text" id="sexo_otro_valor" name="sexo_otro_valor" placeholder="Especifique sexo" class="hidden">
+                </div>
+                <div class="form-group">
+                    <label>¿Cuál es su estado civil?</label>
+                    <select name="estado_civil" onchange="toggleOtro(this, 'estado_civil_otro_valor')">
+                        <option value="">Seleccione...</option>
+                        <option value="Soltero(a)">Soltero(a)</option>
+                        <option value="Casado(a)">Casado(a)</option>
+                        <option value="Union libre">Unión libre</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <input type="text" id="estado_civil_otro_valor" name="estado_civil_otro_valor" placeholder="Especifique estado civil" class="hidden">
+                </div>
+                <div class="form-group">
+                    <label>¿Cuántos hijos tiene?</label>
+                    <select name="num_hijos" onchange="toggleOtroNumHijos(this.value)">
+                        <option value="">Seleccione...</option>
+                        <option value="Ninguno">Ninguno</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="mas_de_2">Más de 2</option>
+                    </select>
+                    <input type="number" id="num_hijos_especificar" name="num_hijos_especificar" placeholder="Especifique número" class="hidden" min="3">
+                </div>
+                <div class="form-group">
+                    <label>¿A qué se dedica usted?</label>
+                    <select name="ocupacion" onchange="toggleOtro(this, 'ocupacion_otro_valor')">
+                        <option value="">Seleccione...</option>
+                        <option value="Empleado">Empleado</option>
+                        <option value="Empresario">Empresario</option>
+                        <option value="Desempleado">Desempleado</option>
+                        <option value="Jubilado">Jubilado</option>
+                        <option value="Estudiante">Estudiante</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <input type="text" id="ocupacion_otro_valor" name="ocupacion_otro_valor" placeholder="Especifique ocupación" class="hidden">
+                </div>
+                <div class="form-group">
+                    <label>Nivel socioeconómico</label>
+                    <select name="nivel_socioeconomico">
+                        <option value="">Seleccione...</option>
+                        <option value="Bajo">Bajo</option>
+                        <option value="Medio">Medio</option>
+                        <option value="Alto">Alto</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>¿Qué nivel de estudios tiene?</label>
+                    <select name="nivel_estudios" onchange="toggleOtro(this, 'nivel_estudios_otro_valor')">
+                        <option value="">Seleccione...</option>
+                        <option value="Primaria">Primaria</option>
+                        <option value="Secundaria">Secundaria</option>
+                        <option value="Preparatoria">Preparatoria</option>
+                        <option value="Universidad">Universidad</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <input type="text" id="nivel_estudios_otro_valor" name="nivel_estudios_otro_valor" placeholder="Especifique nivel" class="hidden">
+                </div>
+                <div class="form-group">
+                    <label>¿En qué ciudad nació?</label>
+                    <select name="ciudad_nacimiento" onchange="toggleOtro(this, 'ciudad_nacimiento_otro_valor')">
+                        <option value="">Seleccione...</option>
+                        <option value="Orizaba">Orizaba</option>
+                        <option value="Cordoba">Córdoba</option>
+                        <option value="Ixtaczoquitlan">Ixtaczoquitlán</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <input type="text" id="ciudad_nacimiento_otro_valor" name="ciudad_nacimiento_otro_valor" placeholder="Especifique ciudad" class="hidden">
+                </div>
+                <div class="form-group">
+                    <label>Ciudad de residencia</label>
+                    <select name="ciudad_residencia" onchange="toggleOtro(this, 'ciudad_residencia_otro_valor')">
+                        <option value="">Seleccione...</option>
+                        <option value="Orizaba">Orizaba</option>
+                        <option value="Cordoba">Córdoba</option>
+                        <option value="Ixtaczoquitlan">Ixtaczoquitlán</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <input type="text" id="ciudad_residencia_otro_valor" name="ciudad_residencia_otro_valor" placeholder="Especifique ciudad" class="hidden">
+                </div>
+                <div class="navigation-buttons">
+                    <button type="button" onclick="nextPage()">Siguiente</button>
+                </div>
+            </div>
+
+            <div class="form-page" id="page2">
+                <h2>Página 2: Salud de la Mujer</h2>
+                <div id="ginecologia_questions">
+                    <div class="form-group">
+                        <label>¿A qué edad tuvo su primera menstruación?</label>
+                        <select name="primera_menstruacion" onchange="toggleOtro(this, 'primera_menstruacion_otro_valor')">
+                            <option value="">Seleccione...</option>
+                            <option value="8-9">8 - 9 años</option>
+                            <option value="10-11">10 - 11 años</option>
+                            <option value="12-13">12 a 13 años</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                        <input type="text" id="primera_menstruacion_otro_valor" name="primera_menstruacion_otro_valor" placeholder="Especifique edad" class="hidden">
+                    </div>
+                    <div class="form-group">
+                        <label>¿Son regulares sus ciclos menstruales?</label>
+                        <select name="ciclos_regulares">
+                            <option value="">Seleccione...</option>
+                            <option value="Si">Sí</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Cuánto duran, cada cuántos días aproximadamente?</label>
+                        <select name="duracion_ciclo" onchange="toggleOtro(this, 'duracion_ciclo_otro_valor')">
+                            <option value="">Seleccione...</option>
+                            <option value="3-4">3 - 4 días</option>
+                            <option value="5-6">5 - 6 días</option>
+                            <option value="7">7 días</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                        <input type="text" id="duracion_ciclo_otro_valor" name="duracion_ciclo_otro_valor" placeholder="Especifique duración" class="hidden">
+                    </div>
+                    <div class="form-group">
+                        <label>¿Ha estado embarazada?</label>
+                        <select name="ha_estado_embarazada" onchange="toggleEmbarazoDetalles(this.value)">
+                            <option value="">Seleccione...</option>
+                            <option value="Si">Sí</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div id="embarazo_detalles" class="hidden">
+                        <div class="form-group">
+                            <label>¿Cuántos embarazos ha tenido?</label>
+                            <select name="num_embarazos" onchange="toggleOtro(this, 'num_embarazos_otro_valor')">
+                                <option value="">Seleccione...</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                            <input type="number" id="num_embarazos_otro_valor" name="num_embarazos_otro_valor" placeholder="Especifique número" class="hidden" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>¿Tuvo alguna complicación en los embarazos?</label>
+                            <div><input type="checkbox" name="complicaciones_embarazo[]" value="Ninguno"> Ninguno</div>
+                            <div><input type="checkbox" name="complicaciones_embarazo[]" value="Anemia"> Anemia</div>
+                            <div><input type="checkbox" name="complicaciones_embarazo[]" value="Hipertension gestacional"> Hipertensión gestacional</div>
+                            <div><input type="checkbox" name="complicaciones_embarazo[]" value="Diabetes gestacional"> Diabetes gestacional</div>
+                            <div><input type="checkbox" name="complicaciones_embarazo[]" value="Infecciones urinarias"> Infecciones urinarias</div>
+                            <div><input type="checkbox" name="complicaciones_embarazo[]" value="Amenaza de parto prematuro"> Amenaza de parto prematuro</div>
+                            <div>
+                                <input type="checkbox" name="complicaciones_embarazo_otro_check" onchange="toggleOtroCheckbox(this, 'complicaciones_embarazo_otro_valor')"> Otro
+                                <input type="text" id="complicaciones_embarazo_otro_valor" name="complicaciones_embarazo_otro_valor" placeholder="Especifique" class="hidden">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ultimo_papanicolaou">¿Cuándo fue su último Papanicolaou?</label>
+                        <input type="date" id="ultimo_papanicolaou" name="ultimo_papanicolaou">
+                    </div>
+                    <div class="form-group hidden" id="mastografia_question">
+                        <label for="ultima_mastografia">¿Cuándo fue su última mastografía?</label>
+                        <input type="date" id="ultima_mastografia" name="ultima_mastografia">
+                    </div>
+                </div>
+                 <p id="ginecologia_skip_message" class="hidden">Se omiten las preguntas de salud ginecológica.</p>
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevPage()">Anterior</button>
+                    <button type="button" onclick="nextPage()">Siguiente</button>
+                </div>
+            </div>
+
+            <div class="form-page" id="page3">
+                <h2>Página 3: Salud General y Emergencias</h2>
+                <div class="form-group">
+                    <label>¿Cuenta con algún servicio de salud o seguro médico público o privado?</label>
+                    <select name="servicio_salud" onchange="toggleOtro(this, 'servicio_salud_otro_valor')">
+                        <option value="">Seleccione...</option>
+                        <option value="IMSS">IMSS</option>
+                        <option value="ISSSTE">ISSSTE</option>
+                        <option value="INSABI">INSABI</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <input type="text" id="servicio_salud_otro_valor" name="servicio_salud_otro_valor" placeholder="Especifique servicio" class="hidden">
+                </div>
+                <div class="form-group">
+                    <label>¿Quién es su contacto en caso de emergencia?</label>
+                    <select name="contacto_emergencia" onchange="toggleOtro(this, 'contacto_emergencia_otro_valor')">
+                        <option value="">Seleccione...</option>
+                        <option value="Madre">Madre</option>
+                        <option value="Padre">Padre</option>
+                        <option value="Hermano o hermana">Hermano o hermana</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <input type="text" id="contacto_emergencia_otro_valor" name="contacto_emergencia_otro_valor" placeholder="Especifique contacto" class="hidden">
+                </div>
+                <div class="form-group">
+                    <label>Alergias</label>
+                    <div><input type="checkbox" name="alergias[]" value="Rinitis alergica"> Rinitis alérgica (Alergia al polvo)</div>
+                    <div><input type="checkbox" name="alergias[]" value="Conjuntivitis alergica"> Conjuntivitis alérgica</div>
+                    <div><input type="checkbox" name="alergias[]" value="Urticaria"> Urticaria</div>
+                    <div><input type="checkbox" name="alergias[]" value="Angioedema"> Angioedema</div>
+                    <div><input type="checkbox" name="alergias[]" value="Alergia al latex"> Alergia al látex</div>
+                    <div><input type="checkbox" name="alergias[]" value="Ninguna"> Ninguna</div>
+                    <div>
+                        <input type="checkbox" name="alergias_otro_check" onchange="toggleOtroCheckbox(this, 'alergias_otro_valor')"> Otro
+                        <input type="text" id="alergias_otro_valor" name="alergias_otro_valor" placeholder="Especifique alergia" class="hidden">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Alergias a medicamento</label>
+                    <div><input type="checkbox" name="alergias_medicamento[]" value="Penicilina G"> Penicilina G</div>
+                    <div><input type="checkbox" name="alergias_medicamento[]" value="Aspirina"> Aspirina</div>
+                    <div><input type="checkbox" name="alergias_medicamento[]" value="Insulina"> Insulina</div>
+                    <div><input type="checkbox" name="alergias_medicamento[]" value="Amoxicilina"> Amoxicilina</div>
+                    <div><input type="checkbox" name="alergias_medicamento[]" value="Ampicilina"> Ampicilina</div>
+                    <div><input type="checkbox" name="alergias_medicamento[]" value="Ibuprofeno"> Ibuprofeno</div>
+                    <div><input type="checkbox" name="alergias_medicamento[]" value="Ninguna"> Ninguna</div>
+                     <div>
+                        <input type="checkbox" name="alergias_medicamento_otro_check" onchange="toggleOtroCheckbox(this, 'alergias_medicamento_otro_valor')"> Otro
+                        <input type="text" id="alergias_medicamento_otro_valor" name="alergias_medicamento_otro_valor" placeholder="Especifique medicamento" class="hidden">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>¿Consumo prolongado de algún medicamento?</label>
+                    <select name="consumo_prolongado_medicamento" onchange="toggleConsumoMedicamentoDetalles(this.value)">
+                        <option value="">Seleccione...</option>
+                        <option value="Si">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div id="consumo_medicamento_detalles" class="hidden">
+                    <div class="form-group">
+                        <label for="nombre_medicamento_prolongado">¿Nombre del medicamento?</label>
+                        <input type="text" id="nombre_medicamento_prolongado" name="nombre_medicamento_prolongado">
+                    </div>
+                </div>
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevPage()">Anterior</button>
+                    <button type="button" onclick="nextPage()">Siguiente</button>
+                </div>
+            </div>
+
+            <div class="form-page" id="page4">
+                <h2>Página 4: Antecedentes Familiares (Madre)</h2>
+                <div class="form-group">
+                    <label>¿Su madre padece alguna enfermedad crónica? En caso afirmativo, por favor indique cuál.</label>
+                    <div class="checkbox-group">
+                        <div><input type="checkbox" name="enf_cronica_madre[]" value="Diabetes mellitus" onchange="toggleEnfermedadDetalles('madre', 'diabetes_mellitus', this.checked)"> Diabetes mellitus</div>
+                        <div id="detalles_madre_diabetes_mellitus" class="hidden enfermedad-detalles">
+                            <label>¿A qué edad fue diagnosticada su madre con Diabetes mellitus?</label><input type="number" name="edad_diag_madre_diabetes_mellitus" min="0">
+                            <label>Estado actual:</label><select name="estado_madre_diabetes_mellitus"><option value="Controlada">Controlada</option><option value="En tratamiento">En tratamiento</option><option value="Empeorando">Empeorando</option><option value="Desconocido">Desconocido</option></select>
+                            <label>¿Hospitalización?</label><select name="hosp_madre_diabetes_mellitus"><option value="Si">Si</option><option value="No">No</option><option value="No lo se">No lo sé</option></select>
+                            <label>¿Antecedentes familiares adicionales?</label><select name="ant_fam_adic_madre_diabetes_mellitus" onchange="toggleFamiliaresAdicionales(this, 'familiares_adicionales_madre_diabetes_mellitus')"><option value="No">No</option><option value="Si">Sí</option></select>
+                            <div id="familiares_adicionales_madre_diabetes_mellitus" class="hidden">
+                                <div><input type="checkbox" name="fam_adic_madre_dm_abuelos"> Abuelos</div>
+                                <div><input type="checkbox" name="fam_adic_madre_dm_tios"> Tíos</div>
+                                <div><input type="checkbox" name="fam_adic_madre_dm_hermanos"> Hermanos</div>
+                            </div>
+                            <label>¿Tratamiento actual?</label><select name="trat_actual_madre_diabetes_mellitus" onchange="toggleTratamientoActual(this, 'opciones_tratamiento_madre_diabetes_mellitus')"><option value="No">No</option><option value="Si">Sí</option><option value="No lo se">No lo sé</option></select>
+                            <div id="opciones_tratamiento_madre_diabetes_mellitus" class="hidden">
+                                <div><input type="checkbox" name="trat_opc_madre_dm_medicamentos"> Medicamentos</div>
+                                <div><input type="checkbox" name="trat_opc_madre_dm_dieta"> Dieta</div>
+                                <div><input type="checkbox" name="trat_opc_madre_dm_cirugia"> Cirugía</div>
+                            </div>
+                            <label>Estilo de vida:</label>
+                            <div><input type="checkbox" name="estilo_vida_madre_dm_activo"> Activo</div>
+                            <div><input type="checkbox" name="estilo_vida_madre_dm_sedentario"> Sedentario</div>
+                            <div><input type="checkbox" name="estilo_vida_madre_dm_fuma"> Fuma</div>
+                            <div><input type="checkbox" name="estilo_vida_madre_dm_alcohol"> Bebe Alcohol</div>
+                            <label>¿Asiste a controles médicos?</label><select name="controles_madre_diabetes_mellitus"><option value="Si">Si</option><option value="No">No</option><option value="Desconozco">Desconozco</option></select>
+                        </div>
+
+                        <div><input type="checkbox" name="enf_cronica_madre[]" value="Hipertension arterial" onchange="toggleEnfermedadDetalles('madre', 'hipertension_arterial', this.checked)"> Hipertensión arterial</div>
+                        <div id="detalles_madre_hipertension_arterial" class="hidden enfermedad-detalles">
+                             <label>¿A qué edad fue diagnosticada?</label><input type="number" name="edad_diag_madre_hta" min="0">
+                            <label>Estado actual:</label><select name="estado_madre_hta"><option value="Controlada">Controlada</option><option value="En tratamiento">En tratamiento</option><option value="Empeorando">Empeorando</option><option value="Desconocido">Desconocido</option></select>
+                            <label>¿Hospitalización?</label><select name="hosp_madre_hta"><option value="Si">Si</option><option value="No">No</option><option value="No lo se">No lo sé</option></select>
+                            <label>¿Antecedentes familiares adicionales?</label><select name="ant_fam_adic_madre_hta" onchange="toggleFamiliaresAdicionales(this, 'familiares_adicionales_madre_hta')"><option value="No">No</option><option value="Si">Sí</option></select>
+                            <div id="familiares_adicionales_madre_hta" class="hidden">
+                                <div><input type="checkbox" name="fam_adic_madre_hta_abuelos"> Abuelos</div>
+                                <div><input type="checkbox" name="fam_adic_madre_hta_tios"> Tíos</div>
+                                <div><input type="checkbox" name="fam_adic_madre_hta_hermanos"> Hermanos</div>
+                            </div>
+                            <label>¿Tratamiento actual?</label><select name="trat_actual_madre_hta" onchange="toggleTratamientoActual(this, 'opciones_tratamiento_madre_hta')"><option value="No">No</option><option value="Si">Sí</option><option value="No lo se">No lo sé</option></select>
+                            <div id="opciones_tratamiento_madre_hta" class="hidden">
+                                <div><input type="checkbox" name="trat_opc_madre_hta_medicamentos"> Medicamentos</div>
+                                <div><input type="checkbox" name="trat_opc_madre_hta_dieta"> Dieta</div>
+                                <div><input type="checkbox" name="trat_opc_madre_hta_cirugia"> Cirugía</div>
+                            </div>
+                             <label>Estilo de vida:</label>
+                            <div><input type="checkbox" name="estilo_vida_madre_hta_activo"> Activo</div>
+                            <div><input type="checkbox" name="estilo_vida_madre_hta_sedentario"> Sedentario</div>
+                            <div><input type="checkbox" name="estilo_vida_madre_hta_fuma"> Fuma</div>
+                            <div><input type="checkbox" name="estilo_vida_madre_hta_alcohol"> Bebe Alcohol</div>
+                            <label>¿Asiste a controles médicos?</label><select name="controles_madre_hta"><option value="Si">Si</option><option value="No">No</option><option value="Desconozco">Desconozco</option></select>
+                        </div>
+                        
+                        <div><input type="checkbox" name="enf_cronica_madre[]" value="Cancer de mama" onchange="toggleEnfermedadDetalles('madre', 'cancer_mama', this.checked)"> Cáncer de mama</div>
+                        <div id="detalles_madre_cancer_mama" class="hidden enfermedad-detalles">
+                            <label>¿A qué edad fue diagnosticada?</label><input type="number" name="edad_diag_madre_cancer_mama" min="0">
+                            <label>Estado actual:</label><select name="estado_madre_cancer_mama"><option value="Controlada">Controlada</option><option value="En tratamiento">En tratamiento</option><option value="Empeorando">Empeorando</option><option value="Desconocido">Desconocido</option></select>
+                            <label>¿Hospitalización?</label><select name="hosp_madre_cancer_mama"><option value="Si">Si</option><option value="No">No</option><option value="No lo se">No lo sé</option></select>
+                            <label>¿Antecedentes familiares adicionales?</label><select name="ant_fam_adic_madre_cancer_mama" onchange="toggleFamiliaresAdicionales(this, 'familiares_adicionales_madre_cancer_mama')"><option value="No">No</option><option value="Si">Sí</option></select>
+                            <div id="familiares_adicionales_madre_cancer_mama" class="hidden">
+                                <div><input type="checkbox" name="fam_adic_madre_cm_abuelos"> Abuelos</div>
+                                <div><input type="checkbox" name="fam_adic_madre_cm_tios"> Tíos</div>
+                                <div><input type="checkbox" name="fam_adic_madre_cm_hermanos"> Hermanos</div>
+                            </div>
+                            <label>¿Tratamiento actual?</label><select name="trat_actual_madre_cancer_mama" onchange="toggleTratamientoActual(this, 'opciones_tratamiento_madre_cancer_mama')"><option value="No">No</option><option value="Si">Sí</option><option value="No lo se">No lo sé</option></select>
+                            <div id="opciones_tratamiento_madre_cancer_mama" class="hidden">
+                                <div><input type="checkbox" name="trat_opc_madre_cm_medicamentos"> Medicamentos</div>
+                                <div><input type="checkbox" name="trat_opc_madre_cm_dieta"> Dieta</div>
+                                <div><input type="checkbox" name="trat_opc_madre_cm_cirugia"> Cirugía</div>
+                            </div>
+                            <label>Estilo de vida:</label>
+                            <div><input type="checkbox" name="estilo_vida_madre_cm_activo"> Activo</div>
+                            <div><input type="checkbox" name="estilo_vida_madre_cm_sedentario"> Sedentario</div>
+                            <div><input type="checkbox" name="estilo_vida_madre_cm_fuma"> Fuma</div>
+                            <div><input type="checkbox" name="estilo_vida_madre_cm_alcohol"> Bebe Alcohol</div>
+                            <label>¿Asiste a controles médicos?</label><select name="controles_madre_cancer_mama"><option value="Si">Si</option><option value="No">No</option><option value="Desconozco">Desconozco</option></select>
+                        </div>
+
+                        <div><input type="checkbox" name="enf_cronica_madre[]" value="Insuficiencia renal cronica" onchange="toggleEnfermedadDetalles('madre', 'insuficiencia_renal', this.checked)"> Insuficiencia renal crónica</div>
+                        <div id="detalles_madre_insuficiencia_renal" class="hidden enfermedad-detalles">
+                           </div>
+
+                        <div><input type="checkbox" name="enf_cronica_madre[]" value="Diabetes mellitus tipo 2" onchange="toggleEnfermedadDetalles('madre', 'diabetes_mellitus_tipo_2', this.checked)"> Diabetes mellitus tipo 2</div>
+                         <div id="detalles_madre_diabetes_mellitus_tipo_2" class="hidden enfermedad-detalles">
+                           </div>
+
+                        <div><input type="checkbox" name="enf_cronica_madre[]" value="Asma" onchange="toggleEnfermedadDetalles('madre', 'asma', this.checked)"> Asma</div>
+                        <div id="detalles_madre_asma" class="hidden enfermedad-detalles">
+                           </div>
+
+                        <div><input type="checkbox" name="enf_cronica_madre[]" value="EPOC" onchange="toggleEnfermedadDetalles('madre', 'epoc', this.checked)"> Enfermedad pulmonar obstructiva crónica (EPOC)</div>
+                        <div id="detalles_madre_epoc" class="hidden enfermedad-detalles">
+                           </div>
+
+                        <div><input type="checkbox" name="enf_cronica_madre[]" value="Cirrosis hepatica alcoholica" onchange="toggleEnfermedadDetalles('madre', 'cirrosis', this.checked)"> Cirrosis hepática alcohólica</div>
+                        <div id="detalles_madre_cirrosis" class="hidden enfermedad-detalles">
+                           </div>
+                        
+                        <div><input type="checkbox" name="enf_cronica_madre[]" value="Ninguna"> Ninguna</div>
+                        <div>
+                            <input type="checkbox" name="enf_cronica_madre_otro_check" onchange="toggleOtroCheckbox(this, 'enf_cronica_madre_otro_valor'); toggleEnfermedadDetalles('madre', 'otro', this.checked)"> Otro
+                            <input type="text" id="enf_cronica_madre_otro_valor" name="enf_cronica_madre_otro_valor" placeholder="Especifique enfermedad" class="hidden">
+                            <div id="detalles_madre_otro" class="hidden enfermedad-detalles">
+                                 </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevPage()">Anterior</button>
+                    <button type="button" onclick="nextPage()">Siguiente</button>
+                </div>
+            </div>
+
+            <div class="form-page" id="page5">
+                <h2>Página 5: Antecedentes Familiares (Padre)</h2>
+                 <div class="form-group">
+                    <label>¿Su padre padece alguna enfermedad crónica? En caso afirmativo, por favor indique cuál.</label>
+                    <div class="checkbox-group">
+                        <div><input type="checkbox" name="enf_cronica_padre[]" value="Diabetes mellitus" onchange="toggleEnfermedadDetalles('padre', 'diabetes_mellitus', this.checked)"> Diabetes mellitus</div>
+                        <div id="detalles_padre_diabetes_mellitus" class="hidden enfermedad-detalles">
+                             <label>¿A qué edad fue diagnosticado su padre con Diabetes mellitus?</label><input type="number" name="edad_diag_padre_diabetes_mellitus" min="0">
+                            <label>Estado actual:</label><select name="estado_padre_diabetes_mellitus"><option value="Controlada">Controlada</option><option value="En tratamiento">En tratamiento</option><option value="Empeorando">Empeorando</option><option value="Desconocido">Desconocido</option></select>
+                            <label>¿Hospitalización?</label><select name="hosp_padre_diabetes_mellitus"><option value="Si">Si</option><option value="No">No</option><option value="No lo se">No lo sé</option></select>
+                            <label>¿Antecedentes familiares adicionales?</label><select name="ant_fam_adic_padre_diabetes_mellitus" onchange="toggleFamiliaresAdicionales(this, 'familiares_adicionales_padre_diabetes_mellitus')"><option value="No">No</option><option value="Si">Sí</option></select>
+                            <div id="familiares_adicionales_padre_diabetes_mellitus" class="hidden">
+                                <div><input type="checkbox" name="fam_adic_padre_dm_madre"> Madre</div>
+                                <div><input type="checkbox" name="fam_adic_padre_dm_abuelos"> Abuelos</div>
+                                <div><input type="checkbox" name="fam_adic_padre_dm_tios"> Tíos</div>
+                                <div><input type="checkbox" name="fam_adic_padre_dm_hermanos"> Hermanos</div>
+                            </div>
+                            <label>¿Tratamiento actual?</label><select name="trat_actual_padre_diabetes_mellitus" onchange="toggleTratamientoActual(this, 'opciones_tratamiento_padre_diabetes_mellitus')"><option value="No">No</option><option value="Si">Sí</option><option value="No lo se">No lo sé</option></select>
+                            <div id="opciones_tratamiento_padre_diabetes_mellitus" class="hidden">
+                                <div><input type="checkbox" name="trat_opc_padre_dm_medicamentos"> Medicamentos</div>
+                                <div><input type="checkbox" name="trat_opc_padre_dm_dieta"> Dieta</div>
+                                <div><input type="checkbox" name="trat_opc_padre_dm_cirugia"> Cirugía</div>
+                            </div>
+                            <label>Estilo de vida:</label>
+                            <div><input type="checkbox" name="estilo_vida_padre_dm_activo"> Activo</div>
+                            <div><input type="checkbox" name="estilo_vida_padre_dm_sedentario"> Sedentario</div>
+                            <div><input type="checkbox" name="estilo_vida_padre_dm_fuma"> Fuma</div>
+                            <div><input type="checkbox" name="estilo_vida_padre_dm_alcohol"> Bebe Alcohol</div>
+                            <label>¿Asiste a controles médicos?</label><select name="controles_padre_diabetes_mellitus"><option value="Si">Si</option><option value="No">No</option><option value="Desconozco">Desconozco</option></select>                        
+                        </div>
+
+                        <div><input type="checkbox" name="enf_cronica_padre[]" value="Hipertension arterial" onchange="toggleEnfermedadDetalles('padre', 'hipertension_arterial', this.checked)"> Hipertensión arterial</div>
+                        <div id="detalles_padre_hipertension_arterial" class="hidden enfermedad-detalles">
+                           </div>
+                        
+                        <div><input type="checkbox" name="enf_cronica_padre[]" value="Cancer de mama" onchange="toggleEnfermedadDetalles('padre', 'cancer_mama', this.checked)"> Cáncer de mama</div>
+                         <div id="detalles_padre_cancer_mama" class="hidden enfermedad-detalles">
+                           </div>
+
+                        <div><input type="checkbox" name="enf_cronica_padre[]" value="Insuficiencia renal cronica" onchange="toggleEnfermedadDetalles('padre', 'insuficiencia_renal', this.checked)"> Insuficiencia renal crónica</div>
+                        <div id="detalles_padre_insuficiencia_renal" class="hidden enfermedad-detalles">
+                           </div>
+
+                        <div><input type="checkbox" name="enf_cronica_padre[]" value="Diabetes mellitus tipo 2" onchange="toggleEnfermedadDetalles('padre', 'diabetes_mellitus_tipo_2', this.checked)"> Diabetes mellitus tipo 2</div>
+                        <div id="detalles_padre_diabetes_mellitus_tipo_2" class="hidden enfermedad-detalles">
+                           </div>
+
+                        <div><input type="checkbox" name="enf_cronica_padre[]" value="Asma" onchange="toggleEnfermedadDetalles('padre', 'asma', this.checked)"> Asma</div>
+                        <div id="detalles_padre_asma" class="hidden enfermedad-detalles">
+                           </div>
+
+                        <div><input type="checkbox" name="enf_cronica_padre[]" value="EPOC" onchange="toggleEnfermedadDetalles('padre', 'epoc', this.checked)"> Enfermedad pulmonar obstructiva crónica (EPOC)</div>
+                        <div id="detalles_padre_epoc" class="hidden enfermedad-detalles">
+                           </div>
+
+                        <div><input type="checkbox" name="enf_cronica_padre[]" value="Cirrosis hepatica alcoholica" onchange="toggleEnfermedadDetalles('padre', 'cirrosis', this.checked)"> Cirrosis hepática alcohólica</div>
+                         <div id="detalles_padre_cirrosis" class="hidden enfermedad-detalles">
+                           </div>
+                        
+                        <div><input type="checkbox" name="enf_cronica_padre[]" value="Ninguna"> Ninguna</div>
+                        <div>
+                            <input type="checkbox" name="enf_cronica_padre_otro_check" onchange="toggleOtroCheckbox(this, 'enf_cronica_padre_otro_valor'); toggleEnfermedadDetalles('padre', 'otro', this.checked)"> Otro
+                            <input type="text" id="enf_cronica_padre_otro_valor" name="enf_cronica_padre_otro_valor" placeholder="Especifique enfermedad" class="hidden">
+                             <div id="detalles_padre_otro" class="hidden enfermedad-detalles">
+                                 </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevPage()">Anterior</button>
+                    <button type="button" onclick="nextPage()">Siguiente</button>
+                </div>
+            </div>
+
+            <div class="form-page" id="page6">
+                <h2>Página 6: Hábitos (Tabaquismo y Alcohol)</h2>
+                <div class="form-group">
+                    <label>¿Fuma usted cigarrillos u otros productos de tabaco?</label>
+                    <select name="fuma" onchange="toggleFumaDetalles(this.value)">
+                        <option value="">Seleccione...</option>
+                        <option value="Si">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div id="fuma_detalles" class="hidden">
+                    <div class="form-group">
+                        <label>¿Qué tipo de productos de tabaco ha consumido?</label>
+                        <div><input type="checkbox" name="productos_tabaco[]" value="Cigarrillos"> Cigarrillos</div>
+                        <div><input type="checkbox" name="productos_tabaco[]" value="Pipa"> Pipa</div>
+                        <div><input type="checkbox" name="productos_tabaco[]" value="Puro"> Puro</div>
+                        <div><input type="checkbox" name="productos_tabaco[]" value="Vapeador"> Vapeador / cigarrillo electrónico</div>
+                        <div><input type="checkbox" name="productos_tabaco[]" value="Tabaco sin humo"> Tabaco sin humo (rape o mascar)</div>
+                        <div>
+                            <input type="checkbox" name="productos_tabaco_otro_check" onchange="toggleOtroCheckbox(this, 'productos_tabaco_otro_valor')"> Otro
+                            <input type="text" id="productos_tabaco_otro_valor" name="productos_tabaco_otro_valor" placeholder="Especifique producto" class="hidden">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cantidad_tabaco_dia">¿Cuántos al día?</label>
+                        <input type="number" id="cantidad_tabaco_dia" name="cantidad_tabaco_dia" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="edad_inicio_fumar">¿A qué edad comenzó a fumar? (Obligatorio si fuma)</label>
+                        <input type="number" id="edad_inicio_fumar" name="edad_inicio_fumar" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label>¿Durante cuántos años ha fumado (o fumó)?</label>
+                        <select name="anos_fumando">
+                            <option value="">Seleccione...</option>
+                            <option value="Menos de 1">Menos de 1</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="Mas de 3">Más de 3</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Ha intentado dejar de fumar alguna vez?</label>
+                        <select name="intento_dejar_fumar">
+                            <option value="">Seleccione...</option>
+                            <option value="Si">Sí</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>¿Consume bebidas alcohólicas?</label>
+                    <select name="consume_alcohol" onchange="toggleAlcoholDetalles(this.value)">
+                        <option value="">Seleccione...</option>
+                        <option value="Si">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div id="alcohol_detalles" class="hidden">
+                    <div class="form-group">
+                        <label>¿Qué tipo de bebidas consume?</label>
+                        <div><input type="checkbox" name="tipo_bebidas_alcohol[]" value="Cerveza"> Cerveza</div>
+                        <div><input type="checkbox" name="tipo_bebidas_alcohol[]" value="Vino"> Vino</div>
+                        <div><input type="checkbox" name="tipo_bebidas_alcohol[]" value="Sidra"> Sidra</div>
+                        <div><input type="checkbox" name="tipo_bebidas_alcohol[]" value="Tequila"> Tequila</div>
+                        <div>
+                            <input type="checkbox" name="tipo_bebidas_alcohol_otro_check" onchange="toggleOtroCheckbox(this, 'tipo_bebidas_alcohol_otro_valor')"> Otro
+                            <input type="text" id="tipo_bebidas_alcohol_otro_valor" name="tipo_bebidas_alcohol_otro_valor" placeholder="Especifique bebida" class="hidden">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Con qué frecuencia es su consumo?</label>
+                        <select name="frecuencia_alcohol">
+                            <option value="">Seleccione...</option>
+                            <option value="Rara vez">Rara vez (menos de 1 vez al mes)</option>
+                            <option value="Ocasionalmente">Ocasionalmente (1-3 veces al mes)</option>
+                            <option value="Frecuentemente">Frecuentemente (1-2 veces por semana)</option>
+                            <option value="Muy frecuentemente">Muy frecuentemente (3 o más veces por semana)</option>
+                            <option value="A diario">A diario o casi a diario</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Cuántas bebidas alcohólicas consumes en una ocasión típica?</label>
+                        <select name="cantidad_alcohol_ocasion">
+                            <option value="">Seleccione...</option>
+                            <option value="1">1 bebida</option>
+                            <option value="2-3">2–3 bebidas</option>
+                            <option value="4-5">4–5 bebidas</option>
+                            <option value="Mas de 5">Más de 5 bebidas</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevPage()">Anterior</button>
+                    <button type="button" onclick="nextPage()">Siguiente</button>
+                </div>
+            </div>
+
+            <div class="form-page" id="page7">
+                <h2>Página 7: Hábitos (Sueño)</h2>
+                <div class="form-group">
+                    <label>¿Tiene un horario de sueño regular?</label>
+                    <select name="horario_sueno_regular">
+                        <option value="">Seleccione...</option>
+                        <option value="Si">Sí, me acuesto y me levanto a la misma hora todos los días.</option>
+                        <option value="Mas o menos">Más o menos, varía ligeramente entre semana y fines de semana.</option>
+                        <option value="No">No, mis horarios cambian constantemente.</option>
+                        <option value="Prefiero no responder">Prefiero no responder.</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>¿Tienes dificultades frecuentes para dormir o permanecer dormido?</label>
+                    <select name="dificultad_dormir" onchange="toggleDificultadDormirDetalles(this.value)">
+                        <option value="">Seleccione...</option>
+                        <option value="Si">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div id="dificultad_dormir_detalles" class="hidden">
+                    <div class="form-group">
+                        <label>¿Con qué frecuencia tienes dificultades para dormir?</label>
+                        <select name="frecuencia_dificultad_dormir">
+                            <option value="">Seleccione...</option>
+                            <option value="Algunas veces al mes">Algunas veces al mes</option>
+                            <option value="Algunas veces a la semana">Algunas veces a la semana</option>
+                            <option value="Casi todas las noches">Casi todas las noches</option>
+                            <option value="Todas las noches">Todas las noches</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Qué tipo de dificultad tienes al dormir?</label>
+                        <select name="tipo_dificultad_dormir">
+                            <option value="">Seleccione...</option>
+                            <option value="Conciliar sueno">Me cuesta conciliar el sueño</option>
+                            <option value="Despierto varias veces">Me despierto varias veces durante la noche</option>
+                            <option value="Despierto temprano">Me despierto muy temprano y no puedo volver a dormir</option>
+                            <option value="No descanso">Siento que no descanso a pesar de dormir</option>
+                            <option value="Pesadillas">Tengo pesadillas frecuentes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Tomas algún medicamento o suplemento para dormir?</label>
+                        <select name="medicamento_dormir" onchange="toggleMedicamentoDormirNombre(this.value)">
+                            <option value="">Seleccione...</option>
+                            <option value="Si">Sí</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div id="medicamento_dormir_nombre_div" class="hidden">
+                        <div class="form-group">
+                            <label for="medicamento_dormir_nombre">¿Cuál es el medicamento que toma?</label>
+                            <input type="text" id="medicamento_dormir_nombre" name="medicamento_dormir_nombre">
+                        </div>
+                    </div>
+                    <div id="no_medicamento_dormir_div" class="hidden">
+                         <div class="form-group">
+                            <label>¿Tienes alguna condición médica diagnosticada relacionada con el sueño?</label>
+                            <select name="condicion_medica_sueno" onchange="toggleCondicionMedicaSuenoCual(this.value)">
+                                <option value="">Seleccione...</option>
+                                <option value="Si">Sí</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div id="condicion_medica_sueno_cual_div" class="hidden">
+                            <div class="form-group">
+                                <label>¿Cuál es tu condición?</label>
+                                <select name="condicion_medica_sueno_cual_tipo" onchange="toggleOtro(this, 'condicion_medica_sueno_cual_otro')">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Insomnio">Insomnio</option>
+                                    <option value="Apnea del sueno">Apnea del sueño</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                                <input type="text" id="condicion_medica_sueno_cual_otro" name="condicion_medica_sueno_cual_otro" placeholder="Especifique condición" class="hidden">
+                            </div>
+                        </div>
+                        <div id="no_condicion_medica_sueno_div" class="hidden">
+                            <div class="form-group">
+                                <label>¿Consumes cafeína, tabaco o alcohol antes de dormir?</label>
+                                <div><input type="checkbox" name="consumo_antes_dormir[]" value="Cafeina"> Cafeína</div>
+                                <div><input type="checkbox" name="consumo_antes_dormir[]" value="Tabaco"> Tabaco</div>
+                                <div><input type="checkbox" name="consumo_antes_dormir[]" value="Alcohol"> Alcohol</div>
+                                <div><input type="checkbox" name="consumo_antes_dormir[]" value="Ninguno"> Ninguno</div>
+                                <div>
+                                    <input type="checkbox" name="consumo_antes_dormir_otro_check" onchange="toggleOtroCheckbox(this, 'consumo_antes_dormir_otro_valor')"> Otro
+                                    <input type="text" id="consumo_antes_dormir_otro_valor" name="consumo_antes_dormir_otro_valor" placeholder="Especifique" class="hidden">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>¿Utilizas pantallas (teléfono, computadora, televisión) justo antes de dormir?</label>
+                                <select name="uso_pantallas_antes_dormir" onchange="toggleTiempoPantallas(this.value)">
+                                    <option value="">Seleccione...</option>
+                                    <option value="Si">Sí</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+                            <div id="tiempo_pantallas_div" class="hidden">
+                                <div class="form-group">
+                                    <label>¿Cuánto tiempo en promedio usas antes de dormir?</label>
+                                    <select name="tiempo_promedio_pantallas">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Menos de 10 min">Menos de 10 min</option>
+                                        <option value="10 Min">10 Min</option>
+                                        <option value="15 Min">15 Min</option>
+                                        <option value="20 Min">20 Min</option>
+                                        <option value="Mas de 20 Min">Más de 20 Min</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label>¿Te sientes somnoliento o fatigado durante el día?</label>
+                    <select name="somnoliento_dia">
+                        <option value="">Seleccione...</option>
+                        <option value="Si">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>¿Cuántas horas duermes, en promedio, por noche?</label>
+                    <select name="horas_sueno_noche">
+                        <option value="">Seleccione...</option>
+                        <option value="Menos de 4">Menos de 4 horas</option>
+                        <option value="4-5">4–5 horas</option>
+                        <option value="6-7">6–7 horas</option>
+                        <option value="8-9">8–9 horas</option>
+                        <option value="Mas de 9">Más de 9 horas</option>
+                    </select>
+                </div>
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevPage()">Anterior</button>
+                    <button type="button" onclick="nextPage()">Siguiente</button>
+                </div>
+            </div>
+
+            <div class="form-page" id="page8">
+                <h2>Página 8: Hábitos (Actividad Física y Alimentación)</h2>
+                <div class="form-group">
+                    <label>¿Realizas alguna actividad física regularmente durante la semana?</label>
+                    <select name="actividad_fisica" onchange="toggleActividadFisicaDetalles(this.value)">
+                        <option value="">Seleccione...</option>
+                        <option value="Si">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div id="actividad_fisica_detalles" class="hidden">
+                    <div class="form-group">
+                        <label>Tipo de actividad física:</label>
+                        <div><input type="checkbox" name="tipo_actividad_fisica[]" value="Gimnasio"> Gimnasio (pesas, máquinas)</div>
+                        <div><input type="checkbox" name="tipo_actividad_fisica[]" value="Correr"> Correr o trotar</div>
+                        <div><input type="checkbox" name="tipo_actividad_fisica[]" value="Caminar"> Caminar</div>
+                        <div><input type="checkbox" name="tipo_actividad_fisica[]" value="Yoga"> Yoga o meditación activa</div>
+                        <div><input type="checkbox" name="tipo_actividad_fisica[]" value="Deportes"> Deportes (fútbol, básquetbol, etc.)</div>
+                        <div><input type="checkbox" name="tipo_actividad_fisica[]" value="Baile"> Baile o clases dirigidas</div>
+                        <div>
+                            <input type="checkbox" name="tipo_actividad_fisica_otro_check" onchange="toggleOtroCheckbox(this, 'tipo_actividad_fisica_otro_valor')"> Otro
+                            <input type="text" id="tipo_actividad_fisica_otro_valor" name="tipo_actividad_fisica_otro_valor" placeholder="Especifique actividad" class="hidden">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Con qué frecuencia haces actividad física?</label>
+                        <select name="frecuencia_actividad_fisica">
+                            <option value="">Seleccione...</option>
+                            <option value="1 dia">1 día a la semana</option>
+                            <option value="2-3 dias">2-3 días a la semana</option>
+                            <option value="4-5 dias">4-5 días a la semana</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Cuánto tiempo dedicas a la actividad física por sesión (en promedio)?</label>
+                        <select name="tiempo_sesion_actividad_fisica">
+                            <option value="">Seleccione...</option>
+                            <option value="Menos de 30 min">Menos de 30 minutos</option>
+                            <option value="30-60 min">Entre 30 y 60 minutos</option>
+                            <option value="Mas de 1 hora">Más de 1 hora</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Realizas actividad física por recomendación médica?</label>
+                        <select name="recomendacion_medica_actividad">
+                            <option value="">Seleccione...</option>
+                            <option value="Si">Sí</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Por cuántos años lleva haciendo actividad física?</label>
+                         <select name="anos_actividad_fisica">
+                            <option value="">Seleccione...</option>
+                            <option value="Menos de 1">Menos de 1</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3-4">3-4</option>
+                            <option value="mas de 5">Más de 5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>¿Sientes que tu actividad física mejora tu salud o estado de ánimo?</label>
+                        <select name="mejora_salud_actividad">
+                            <option value="">Seleccione...</option>
+                            <option value="Si">Sí</option>
+                            <option value="No">No</option>
+                            <option value="No estoy seguro">No estoy seguro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>¿Cuántas comidas completas realiza al día (desayuno, comida, cena)?</label>
+                    <select name="comidas_completas_dia">
+                        <option value="">Seleccione...</option>
+                        <option value="0">0 – No suelo comer comidas completas</option>
+                        <option value="1">1 comida</option>
+                        <option value="2">2 comidas</option>
+                        <option value="3">3 comidas</option>
+                        <option value="Mas de 3">Más de 3 comidas (refrigerios)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>¿Con qué frecuencia consume frutas y verduras?</label>
+                    <select name="frecuencia_frutas_verduras">
+                        <option value="">Seleccione...</option>
+                        <option value="Nunca">Nunca</option>
+                        <option value="1-2 semana">1 a 2 veces por semana</option>
+                        <option value="3-4 semana">3 a 4 veces por semana</option>
+                        <option value="Casi todos los dias">Casi todos los días</option>
+                        <option value="Diariamente">Diariamente en cada comida</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>¿Con qué frecuencia consume alimentos altos en grasa o fritos?</label>
+                    <select name="frecuencia_grasas_fritos">
+                        <option value="">Seleccione...</option>
+                        <option value="Nunca">Nunca</option>
+                        <option value="1-2 semana">1 a 2 veces por semana</option>
+                        <option value="3-4 semana">3 a 4 veces por semana</option>
+                        <option value="Casi todos los dias">Casi todos los días</option>
+                        <option value="Diariamente">Diariamente en cada comida</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>¿Ha notado cambios recientes en su peso?</label>
+                    <select name="cambios_peso_recientes">
+                        <option value="">Seleccione...</option>
+                        <option value="Subido">Sí, he subido de peso</option>
+                        <option value="Bajado">Sí, he bajado de peso</option>
+                        <option value="No cambios">No he notado cambios</option>
+                        <option value="No estoy seguro">No estoy seguro(a)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>¿Cuánta agua u otros líquidos (sin contar refrescos o alcohol) consume al día, aproximadamente?</label>
+                    <select name="consumo_agua_liquidos">
+                        <option value="">Seleccione...</option>
+                        <option value="Menos de 500ml">Menos de 500 ml (menos de 2 vasos)</option>
+                        <option value="500ml-1L">Entre 500 ml y 1 litro (2 a 4 vasos)</option>
+                        <option value="1L-2L">Entre 1 y 2 litros (4 a 8 vasos)</option>
+                        <option value="Mas de 2L">Más de 2 litros</option>
+                        <option value="No estoy seguro">No estoy seguro(a)</option>
+                    </select>
+                </div>
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevPage()">Anterior</button>
+                    <button type="button" onclick="nextPage()">Siguiente</button>
+                </div>
+            </div>
+
+            <div class="form-page" id="page9">
+                <h2>Página 9: Historial de Vacunación</h2>
+                <div class="form-group">
+                    <label>¿Se ha aplicado la vacuna contra el tétanos en los últimos 10 años?</label>
+                    <select name="vacuna_tetanos">
+                        <option value="">Seleccione...</option>
+                        <option value="Si ultimos 10 anos">Sí, dentro de los últimos 10 años</option>
+                        <option value="No mas de 10 anos">No, hace más de 10 años</option>
+                        <option value="No recuerdo">No recuerdo</option>
+                        <option value="Nunca">Nunca me la he aplicado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>¿Se ha aplicado la vacuna contra la hepatitis B?</label>
+                    <select name="vacuna_hepatitis_b">
+                        <option value="">Seleccione...</option>
+                        <option value="Si completa">Sí, tengo el esquema completo (3 dosis)</option>
+                        <option value="Si incompleta">Solo recibí 1 o 2 dosis</option>
+                        <option value="No aplicada">No me la he aplicado</option>
+                        <option value="No estoy seguro">No estoy seguro(a)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>¿Se aplica la vacuna contra la influenza cada año?</label>
+                    <select name="vacuna_influenza">
+                        <option value="">Seleccione...</option>
+                        <option value="Si todos los anos">Sí, todos los años</option>
+                        <option value="A veces">A veces (algunas temporadas sí, otras no)</option>
+                        <option value="Nunca">No me la aplico nunca</option>
+                        <option value="No estoy seguro">No estoy seguro(a)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>¿Cuenta con la vacuna contra COVID-19?</label>
+                    <select name="vacuna_covid">
+                        <option value="">Seleccione...</option>
+                        <option value="Si completa refuerzos">Sí, esquema completo y refuerzos</option>
+                        <option value="Si primario">Sí, solo esquema primario (1 o 2 dosis)</option>
+                        <option value="Solo una dosis">Solo una dosis (esquema incompleto)</option>
+                        <option value="No vacunado">No me vacuné contra COVID-19</option>
+                        <option value="Prefiero no responder">Prefiero no responder</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>¿Recibió el esquema de vacunación infantil completo?</label>
+                    <select name="vacunacion_infantil_completa">
+                        <option value="">Seleccione...</option>
+                        <option value="Si">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevPage()">Anterior</button>
+                    <button type="button" onclick="nextPage()">Siguiente</button>
+                </div>
+            </div>
+
+            <div class="form-page" id="page10">
+                <h2>Página 10: Historial Médico y Sustancias</h2>
+                <div class="form-group">
+                    <label>¿Padece actualmente alguna enfermedad crónica diagnosticada?</label>
+                    <div><input type="checkbox" name="enf_cronica_actual[]" value="Epilepsia" onchange="toggleEnfermedadActualDetalles(this, 'epilepsia')"> Epilepsia</div>
+                    <div id="detalles_enf_actual_epilepsia" class="hidden enfermedad-actual-detalles">
+                        <label for="diag_enf_actual_epilepsia">Año de diagnóstico:</label><input type="number" name="diag_enf_actual_epilepsia" placeholder="YYYY">
+                    </div>
+                    <div><input type="checkbox" name="enf_cronica_actual[]" value="Diabetes mellitus" onchange="toggleEnfermedadActualDetalles(this, 'diabetes_mellitus')"> Diabetes mellitus</div>
+                     <div id="detalles_enf_actual_diabetes_mellitus" class="hidden enfermedad-actual-detalles">
+                        <label for="diag_enf_actual_diabetes_mellitus">Año de diagnóstico:</label><input type="number" name="diag_enf_actual_diabetes_mellitus" placeholder="YYYY">
+                    </div>
+                    <div><input type="checkbox" name="enf_cronica_actual[]" value="Hipertension arterial" onchange="toggleEnfermedadActualDetalles(this, 'hipertension_arterial')"> Hipertensión arterial</div>
+                    <div id="detalles_enf_actual_hipertension_arterial" class="hidden enfermedad-actual-detalles">
+                        <label for="diag_enf_actual_hipertension_arterial">Año de diagnóstico:</label><input type="number" name="diag_enf_actual_hipertension_arterial" placeholder="YYYY">
+                    </div>
+                     <div><input type="checkbox" name="enf_cronica_actual[]" value="Cancer de mama" onchange="toggleEnfermedadActualDetalles(this, 'cancer_mama')"> Cáncer de mama</div>
+                    <div id="detalles_enf_actual_cancer_mama" class="hidden enfermedad-actual-detalles"><label>Año de diagnóstico:</label><input type="number" name="diag_enf_actual_cancer_mama" placeholder="YYYY"></div>
+                    
+                    <div><input type="checkbox" name="enf_cronica_actual[]" value="Insuficiencia renal cronica" onchange="toggleEnfermedadActualDetalles(this, 'insuf_renal')"> Insuficiencia renal crónica</div>
+                    <div id="detalles_enf_actual_insuf_renal" class="hidden enfermedad-actual-detalles"><label>Año de diagnóstico:</label><input type="number" name="diag_enf_actual_insuf_renal" placeholder="YYYY"></div>
+
+                    <div><input type="checkbox" name="enf_cronica_actual[]" value="Diabetes mellitus tipo 2" onchange="toggleEnfermedadActualDetalles(this, 'dm2')"> Diabetes mellitus tipo 2</div>
+                    <div id="detalles_enf_actual_dm2" class="hidden enfermedad-actual-detalles"><label>Año de diagnóstico:</label><input type="number" name="diag_enf_actual_dm2" placeholder="YYYY"></div>
+
+                    <div><input type="checkbox" name="enf_cronica_actual[]" value="Asma" onchange="toggleEnfermedadActualDetalles(this, 'asma')"> Asma</div>
+                    <div id="detalles_enf_actual_asma" class="hidden enfermedad-actual-detalles"><label>Año de diagnóstico:</label><input type="number" name="diag_enf_actual_asma" placeholder="YYYY"></div>
+                    
+                    <div><input type="checkbox" name="enf_cronica_actual[]" value="EPOC" onchange="toggleEnfermedadActualDetalles(this, 'epoc')"> Enfermedad pulmonar obstructiva crónica (EPOC)</div>
+                    <div id="detalles_enf_actual_epoc" class="hidden enfermedad-actual-detalles"><label>Año de diagnóstico:</label><input type="number" name="diag_enf_actual_epoc" placeholder="YYYY"></div>
+
+                    <div><input type="checkbox" name="enf_cronica_actual[]" value="Cirrosis hepatica alcoholica" onchange="toggleEnfermedadActualDetalles(this, 'cirrosis')"> Cirrosis hepática alcohólica</div>
+                    <div id="detalles_enf_actual_cirrosis" class="hidden enfermedad-actual-detalles"><label>Año de diagnóstico:</label><input type="number" name="diag_enf_actual_cirrosis" placeholder="YYYY"></div>
+                    
+                    <div><input type="checkbox" name="enf_cronica_actual[]" value="Ninguna"> Ninguna</div>
+                    <div>
+                        <input type="checkbox" name="enf_cronica_actual_otro_check" onchange="toggleOtroCheckbox(this, 'enf_cronica_actual_otro_valor'); toggleEnfermedadActualDetalles(this, 'otro')"> Otro
+                        <input type="text" id="enf_cronica_actual_otro_valor" name="enf_cronica_actual_otro_valor" placeholder="Especifique enfermedad" class="hidden">
+                        <div id="detalles_enf_actual_otro" class="hidden enfermedad-actual-detalles"><label>Año de diagnóstico:</label><input type="number" name="diag_enf_actual_otro" placeholder="YYYY"></div>
+                    </div>
+                </div>
+                <div id="tratamiento_enf_cronica_div" class="hidden">
+                    <div class="form-group">
+                        <label>¿Se encuentra actualmente en tratamiento médico para alguna de estas condiciones?</label>
+                        <select name="tratamiento_enf_cronica_actual">
+                            <option value="">Seleccione...</option>
+                            <option value="Si regular">Sí, con control médico regular</option>
+                            <option value="Si no sigue">Sí, pero no sigo tratamiento actualmente</option>
+                            <option value="No tratamiento">No estoy bajo tratamiento</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>¿Ha recibido transfusiones de sangre?</label>
+                    <select name="transfusiones_sangre" onchange="toggleTransfusionAno(this.value)">
+                        <option value="">Seleccione...</option>
+                        <option value="Si">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div id="transfusion_ano_div" class="hidden">
+                    <div class="form-group">
+                        <label for="transfusion_ano">¿En qué año?</label>
+                        <input type="number" id="transfusion_ano" name="transfusion_ano" placeholder="YYYY">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>¿Ha padecido enfermedades infecciosas importantes?</label>
+                    <div><input type="checkbox" name="enf_infecciosas[]" value="Hepatitis"> Hepatitis</div>
+                    <div><input type="checkbox" name="enf_infecciosas[]" value="Tuberculosis"> Tuberculosis</div>
+                    <div><input type="checkbox" name="enf_infecciosas[]" value="VIH/SIDA"> VIH/SIDA</div>
+                    <div><input type="checkbox" name="enf_infecciosas[]" value="Fiebre reumatica"> Fiebre reumática</div>
+                </div>
+                <div class="form-group">
+                    <label>¿Tuvo las enfermedades típicas de la infancia?</label>
+                    <div><input type="checkbox" name="enf_infancia[]" value="Varicela"> Varicela</div>
+                    <div><input type="checkbox" name="enf_infancia[]" value="Sarampion"> Sarampión</div>
+                    <div><input type="checkbox" name="enf_infancia[]" value="Rubeola"> Rubéola</div>
+                    <div><input type="checkbox" name="enf_infancia[]" value="Paperas"> Paperas</div>
+                    <div><input type="checkbox" name="enf_infancia[]" value="Sifilis"> Sífilis</div> </div>
+                
+                <div class="form-group">
+                    <label>¿Usa alguna droga o sustancia psicoactiva?</label>
+                    <select name="uso_drogas" onchange="toggleDrogasDetalles(this.value)">
+                        <option value="">Seleccione...</option>
+                        <option value="Si actualmente">Sí, actualmente consumo alguna</option>
+                        <option value="Si pasado">Sí, consumí en el pasado pero ya no lo hago</option>
+                        <option value="No nunca">No, nunca he consumido</option>
+                        <option value="Prefiero no responder">Prefiero no responder</option>
+                    </select>
+                </div>
+                <div id="drogas_detalles" class="hidden">
+                    <div class="form-group">
+                        <label>¿Qué tipo(s) de sustancia(s) ha consumido o consume actualmente?</label>
+                        <div><input type="checkbox" name="tipo_sustancias[]" value="Ninguna" onchange="toggleSustanciaFrecuencia(this)"> Ninguna</div>
+                        <div><input type="checkbox" name="tipo_sustancias[]" value="Marihuana" onchange="toggleSustanciaFrecuencia(this)"> Marihuana</div>
+                        <div><input type="checkbox" name="tipo_sustancias[]" value="Cocaina" onchange="toggleSustanciaFrecuencia(this)"> Cocaína</div>
+                        <div><input type="checkbox" name="tipo_sustancias[]" value="Anfetaminas" onchange="toggleSustanciaFrecuencia(this)"> Anfetaminas</div>
+                        <div><input type="checkbox" name="tipo_sustancias[]" value="LSD" onchange="toggleSustanciaFrecuencia(this)"> LSD</div>
+                        <div><input type="checkbox" name="tipo_sustancias[]" value="Extasis" onchange="toggleSustanciaFrecuencia(this)"> Éxtasis</div>
+                        <div><input type="checkbox" name="tipo_sustancias[]" value="Metanfetaminas" onchange="toggleSustanciaFrecuencia(this)"> Metanfetaminas</div>
+                    </div>
+                    <div id="frecuencia_consumo_sustancias_div" class="hidden">
+                        <div class="form-group">
+                            <label>¿Con qué frecuencia consume actualmente estas sustancias?</label>
+                            <select name="frecuencia_consumo_sustancias">
+                                <option value="">Seleccione...</option>
+                                <option value="Diario">Diario</option>
+                                <option value="Varias veces semana">Varias veces por semana</option>
+                                <option value="1 vez semana">1 vez por semana</option>
+                                <option value="Ocasionalmente">Ocasionalmente (menos de 1 vez al mes)</option>
+                                <option value="Ya no consumo">Ya no consumo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edad_inicio_consumo_sustancias">¿A qué edad inició el consumo de sustancias psicoactivas?</label>
+                        <input type="number" id="edad_inicio_consumo_sustancias" name="edad_inicio_consumo_sustancias" placeholder="Edad" min="1">
+                        <select name="edad_inicio_consumo_sustancias_opcion">
+                            <option value="">o seleccione...</option>
+                            <option value="No recuerdo">No recuerdo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevPage()">Anterior</button>
+                    <button type="button" onclick="nextPage()">Siguiente</button>
+                </div>
+            </div>
+
+            <div class="form-page" id="page11">
+                <h2>Página 11: Salud Sexual</h2>
+                <div id="salud_sexual_questions">
+                    <div class="form-group">
+                        <label>¿Tiene actualmente vida sexual activa?</label>
+                        <select name="vida_sexual_activa" onchange="toggleVidaSexualActivaDetalles(this.value)">
+                            <option value="">Seleccione...</option>
+                            <option value="Si">Sí</option>
+                            <option value="No">No</option>
+                            <option value="Prefiero no responder">Prefiero no responder</option>
+                        </select>
+                    </div>
+                    <div id="vida_sexual_activa_detalles" class="hidden">
+                        <div class="form-group">
+                            <label>¿Cuántas parejas sexuales ha tenido en los últimos 12 meses?</label>
+                            <select name="num_parejas_sexuales_12_meses">
+                                <option value="">Seleccione...</option>
+                                <option value="1">1</option>
+                                <option value="2-3">2 a 3</option>
+                                <option value="4 o mas">4 o más</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>¿Utiliza algún método de protección contra infecciones de transmisión sexual (ETS)?</label>
+                            <select name="proteccion_ets">
+                                <option value="">Seleccione...</option>
+                                <option value="Siempre">Siempre</option>
+                                <option value="A veces">A veces</option>
+                                <option value="Nunca">Nunca</option>
+                                <option value="Prefiero no responder">Prefiero no responder</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>¿Conoce el estado de salud sexual de su(s) pareja(s)?</label>
+                            <select name="conoce_salud_sexual_pareja">
+                                <option value="">Seleccione...</option>
+                                <option value="Si">Sí</option>
+                                <option value="No">No</option>
+                                <option value="No estoy seguro">No estoy seguro</option>
+                                <option value="Prefiero no responder">Prefiero no responder</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>¿Alguna vez ha sido diagnosticado(a) con una infección de transmisión sexual (ETS)?</label>
+                            <div><input type="checkbox" name="diagnostico_ets[]" value="Ninguna"> Ninguna</div>
+                            <div><input type="checkbox" name="diagnostico_ets[]" value="Clamidia"> Clamidia</div>
+                            <div><input type="checkbox" name="diagnostico_ets[]" value="Sifilis"> Sífilis</div>
+                            <div><input type="checkbox" name="diagnostico_ets[]" value="Gonorrea"> Gonorrea</div>
+                            <div><input type="checkbox" name="diagnostico_ets[]" value="VPH"> VPH</div>
+                            <div><input type="checkbox" name="diagnostico_ets[]" value="VIH"> VIH</div>
+                            <div><input type="checkbox" name="diagnostico_ets[]" value="Herpes genital"> Herpes genital</div>
+                        </div>
+                        <div class="form-group">
+                            <label>¿Utiliza actualmente algún método anticonceptivo?</label>
+                             <div><input type="checkbox" name="metodo_anticonceptivo[]" value="Condon"> Condón</div>
+                             <div><input type="checkbox" name="metodo_anticonceptivo[]" value="Pastillas"> Pastillas anticonceptivas</div>
+                             <div><input type="checkbox" name="metodo_anticonceptivo[]" value="Implante"> Implante subdérmico</div>
+                             <div><input type="checkbox" name="metodo_anticonceptivo[]" value="DIU"> DIU</div>
+                             <div><input type="checkbox" name="metodo_anticonceptivo[]" value="Inyecciones"> Inyecciones</div>
+                             <div>
+                                <input type="checkbox" name="metodo_anticonceptivo_otro_check" onchange="toggleOtroCheckbox(this, 'metodo_anticonceptivo_otro_valor')"> Otro
+                                <input type="text" id="metodo_anticonceptivo_otro_valor" name="metodo_anticonceptivo_otro_valor" placeholder="Especifique método" class="hidden">
+                            </div>
+                             <div><input type="checkbox" name="metodo_anticonceptivo[]" value="Ninguno"> No uso ningún método</div>
+                        </div>
+                    </div>
+                </div>
+                <p id="salud_sexual_skip_message" class="hidden">Se omiten las preguntas de salud sexual.</p>
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevPage()">Anterior</button>
+                    <button type="submit">Finalizar y Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Firebase App (required) -->
+<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+
+<!-- Firebase Firestore (optional, if you're using Firestore) -->
+<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+
+<!-- Your custom script -->
+<script src="script.js"></script>
+
+</body>
+</html>
