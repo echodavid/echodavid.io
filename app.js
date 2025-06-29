@@ -3,6 +3,12 @@
 
 class ProfessionalWebsite {
     constructor() {
+        // EmailJS Configuration
+        this.emailConfig = {
+            serviceID: 'service_xxxxxxxxx', // Reemplaza con tu Service ID
+            templateID: 'template_xxxxxxxx', // Reemplaza con tu Template ID
+            publicKey: 'xxxxxxxxxxxxxx' // Reemplaza con tu Public Key
+        };
         this.init();
     }
 
@@ -28,6 +34,11 @@ class ProfessionalWebsite {
     }
 
     initializeComponents() {
+        // Initialize EmailJS
+        if (typeof emailjs !== 'undefined') {
+            emailjs.init(this.emailConfig.publicKey);
+        }
+        
         // Initialize all interactive components
         this.navToggle = document.getElementById('nav-toggle');
         this.navMenu = document.getElementById('nav-menu');
@@ -362,17 +373,8 @@ class ProfessionalWebsite {
         });
 
         if (isFormValid) {
-            // Show success message
-            this.showFormSuccess();
-            
-            // Here you would typically send the data to your backend
-            console.log('Form data:', Object.fromEntries(formData));
-            
-            // Reset form after successful submission
-            setTimeout(() => {
-                this.contactForm.reset();
-                this.hideFormSuccess();
-            }, 3000);
+            // Send email with EmailJS
+            this.sendEmail(formData);
         } else {
             // Focus on first invalid field
             const firstInvalidField = this.contactForm.querySelector('.error');
@@ -382,36 +384,92 @@ class ProfessionalWebsite {
         }
     }
 
-    showFormSuccess() {
+    async sendEmail(formData) {
         const submitButton = this.contactForm.querySelector('button[type="submit"]');
         const originalText = submitButton.textContent;
         
-        submitButton.textContent = '✓ Solicitud Enviada';
+        // Show loading state
+        submitButton.textContent = 'Enviando...';
         submitButton.disabled = true;
-        submitButton.classList.add('success');
+        submitButton.classList.add('loading');
+
+        try {
+            // Prepare email data
+            const emailData = {
+                to_name: 'David Eduardo Espinosa',
+                from_name: formData.get('name'),
+                from_email: formData.get('email'),
+                company: formData.get('company') || 'No especificada',
+                project_type: formData.get('project-type'),
+                budget: formData.get('budget') || 'No especificado',
+                message: formData.get('message'),
+                timestamp: new Date().toLocaleString('es-MX', {
+                    timeZone: 'America/Mexico_City',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })
+            };
+
+            // Send email using EmailJS
+            const response = await emailjs.send(
+                this.emailConfig.serviceID,
+                this.emailConfig.templateID,
+                emailData
+            );
+
+            console.log('Email sent successfully:', response);
+            this.showFormSuccess();
+            
+            // Reset form after successful submission
+            setTimeout(() => {
+                this.contactForm.reset();
+                this.hideFormSuccess();
+                this.clearAllFieldErrors();
+            }, 5000);
+
+        } catch (error) {
+            console.error('Error sending email:', error);
+            this.showFormError('Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo o contáctame directamente.');
+        } finally {
+            // Reset button state
+            setTimeout(() => {
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                submitButton.classList.remove('loading');
+            }, 2000);
+        }
+    }
+
+    showFormSuccess() {
+        // Remove any existing messages
+        this.hideFormError();
+        
+        const submitButton = this.contactForm.querySelector('button[type="submit"]');
         
         // Create success message
         const successMessage = document.createElement('div');
         successMessage.className = 'success-message';
-        successMessage.textContent = 'Gracias por tu mensaje. Te contactaré pronto.';
+        successMessage.innerHTML = `
+            <div style="display: flex; align-items: center; gap: var(--space-8);">
+                <span style="font-size: 1.2em;">✓</span>
+                <span>¡Mensaje enviado exitosamente! Te contactaré pronto.</span>
+            </div>
+        `;
         successMessage.style.cssText = `
             background: rgba(33, 128, 141, 0.1);
-            color: var(--color-success);
+            color: #16a34a;
             padding: var(--space-12);
             border-radius: var(--radius-base);
             margin-top: var(--space-16);
             text-align: center;
             font-weight: var(--font-weight-medium);
+            border: 1px solid rgba(34, 197, 94, 0.2);
         `;
         
         this.contactForm.appendChild(successMessage);
-        
-        // Reset after 3 seconds
-        setTimeout(() => {
-            submitButton.textContent = originalText;
-            submitButton.disabled = false;
-            submitButton.classList.remove('success');
-        }, 3000);
     }
 
     hideFormSuccess() {
@@ -419,6 +477,42 @@ class ProfessionalWebsite {
         if (successMessage) {
             successMessage.remove();
         }
+    }
+
+    showFormError(message) {
+        // Remove any existing error message
+        this.hideFormError();
+        
+        // Create error message
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'error-message-form';
+        errorMessage.textContent = message;
+        errorMessage.style.cssText = `
+            background: rgba(220, 38, 127, 0.1);
+            color: #dc2626;
+            padding: var(--space-12);
+            border-radius: var(--radius-base);
+            margin-top: var(--space-16);
+            text-align: center;
+            font-weight: var(--font-weight-medium);
+            border: 1px solid rgba(220, 38, 127, 0.2);
+        `;
+        
+        this.contactForm.appendChild(errorMessage);
+    }
+
+    hideFormError() {
+        const errorMessage = this.contactForm.querySelector('.error-message-form');
+        if (errorMessage) {
+            errorMessage.remove();
+        }
+    }
+
+    clearAllFieldErrors() {
+        const errorFields = this.contactForm.querySelectorAll('.error');
+        errorFields.forEach(field => {
+            this.clearFieldError(field);
+        });
     }
 
     setupModal() {
