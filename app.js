@@ -172,8 +172,12 @@ class ProfessionalWebsite {
 
     openMobileMenu() {
         this.navMenu.classList.add('show');
+        this.navToggle.classList.add('active');
         this.navToggle.setAttribute('aria-expanded', 'true');
         this.navToggle.setAttribute('aria-label', 'Cerrar menú de navegación');
+        
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
         
         // Trap focus within menu
         const firstFocusable = this.navMenu.querySelector('a, button');
@@ -184,8 +188,12 @@ class ProfessionalWebsite {
 
     closeMobileMenu() {
         this.navMenu.classList.remove('show');
+        this.navToggle.classList.remove('active');
         this.navToggle.setAttribute('aria-expanded', 'false');
         this.navToggle.setAttribute('aria-label', 'Abrir menú de navegación');
+        
+        // Restore body scroll
+        document.body.style.overflow = '';
     }
 
     setupScrollEffects() {
