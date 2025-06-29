@@ -1,0 +1,534 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="David Eduardo Espinosa Rojas - Desarrollador Fullstack y Consultor Tecnológico especializado en NestJS, Angular y soluciones empresariales">
+    <title>David Eduardo Espinosa - Desarrollador Fullstack & Consultor Tecnológico</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header" role="banner">
+        <nav class="nav container" aria-label="Navegación principal">
+            <div class="nav__brand">
+                <h1 class="nav__logo">
+                    <span class="nav__name">David Eduardo Espinosa</span>
+                    <span class="nav__title">Fullstack Developer & Tech Consultant</span>
+                </h1>
+            </div>
+            
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list" role="menubar">
+                    <li class="nav__item">
+                        <a href="#inicio" class="nav__link" role="menuitem">Inicio</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#sobre-mi" class="nav__link" role="menuitem">Sobre Mí</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#servicios" class="nav__link" role="menuitem">Servicios</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#experiencia" class="nav__link" role="menuitem">Experiencia</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#contacto" class="nav__link" role="menuitem">Contacto</a>
+                    </li>
+                </ul>
+                <button class="btn btn--primary nav__cta" onclick="scrollToSection('contacto')">
+                    Contratar Servicios
+                </button>
+            </div>
+
+            <button class="nav__toggle" id="nav-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+                <span class="nav__hamburger"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="inicio" role="banner">
+            <div class="container hero__container">
+                <div class="hero__content">
+                    <h2 class="hero__title">Desarrollo Web Profesional & Consultoría Tecnológica</h2>
+                    <p class="hero__subtitle">Transformo ideas en soluciones digitales escalables y robustas</p>
+                    <p class="hero__description">
+                        Desarrollador Fullstack con experiencia en NestJS, Angular, Node.js y arquitecturas modernas. 
+                        Especializado en crear aplicaciones web empresariales y sistemas backend de alta performance.
+                    </p>
+                    
+                    <div class="hero__actions">
+                        <button class="btn btn--primary btn--lg" onclick="scrollToSection('servicios')">
+                            Ver Proyectos
+                        </button>
+                        <button class="btn btn--outline btn--lg" onclick="scrollToSection('contacto')">
+                            Solicitar Consulta
+                        </button>
+                    </div>
+
+                    <div class="hero__badges">
+                        <span class="badge">Angular</span>
+                        <span class="badge">NestJS</span>
+                        <span class="badge">Node.js</span>
+                        <span class="badge">PostgreSQL</span>
+                        <span class="badge">AWS</span>
+                        <span class="badge">Kotlin</span>
+                    </div>
+                </div>
+                
+                <div class="hero__image">
+                    <div class="hero__placeholder">
+                        <div class="hero__icon">💻</div>
+                        <p>Desarrollador Profesional</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="sobre-mi">
+            <div class="container about__container">
+                <div class="about__content">
+                    <div class="about__text">
+                        <h2 class="section__title">Desarrollador Senior & Consultor Tecnológico</h2>
+                        <p class="about__description">
+                            Como estudiante de Ingeniería de Software en la Universidad Veracruzana y desarrollador 
+                            fullstack profesional, me especializo en crear soluciones tecnológicas robustas y escalables. 
+                            Mi experiencia abarca desde aplicaciones web empresariales hasta sistemas de inteligencia 
+                            artificial y desarrollo móvil con Kotlin.
+                        </p>
+                        <p class="about__description">
+                            Mi enfoque se centra en la calidad del código, las mejores prácticas de desarrollo y la 
+                            entrega de soluciones que realmente impacten en el crecimiento de los negocios. Trabajo 
+                            con tecnologías modernas como NestJS, Angular y Node.js para garantizar aplicaciones 
+                            de nivel empresarial.
+                        </p>
+
+                        <div class="about__stats">
+                            <div class="stat">
+                                <h3 class="stat__number">2+</h3>
+                                <p class="stat__label">Años de Experiencia</p>
+                            </div>
+                            <div class="stat">
+                                <h3 class="stat__number">15+</h3>
+                                <p class="stat__label">Proyectos Completados</p>
+                            </div>
+                            <div class="stat">
+                                <h3 class="stat__number">100%</h3>
+                                <p class="stat__label">Satisfacción del Cliente</p>
+                            </div>
+                            <div class="stat">
+                                <h3 class="stat__number">20+</h3>
+                                <p class="stat__label">Tecnologías Dominadas</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about__image">
+                        <div class="about__placeholder">
+                            <div class="about__icon">👨‍💻</div>
+                            <p>David Eduardo Espinosa</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services" id="servicios">
+            <div class="container">
+                <h2 class="section__title text-center">Servicios Profesionales</h2>
+                <p class="section__subtitle text-center">
+                    Soluciones tecnológicas completas para empresas y startups
+                </p>
+
+                <div class="services__grid">
+                    <div class="service card">
+                        <div class="service__icon">🌐</div>
+                        <h3 class="service__title">Desarrollo Web Completo</h3>
+                        <div class="service__price">$2,000 - $5,000 MX</div>
+                        <p class="service__description">
+                            Aplicaciones web full-stack con Angular/React + NestJS, bases de datos optimizadas 
+                            y deploy automatizado en plataformas cloud.
+                        </p>
+                        <ul class="service__features">
+                            <li>✓ Angular/React Frontend</li>
+                            <li>✓ NestJS Backend</li>
+                            <li>✓ PostgreSQL/MongoDB</li>
+                            <li>✓ CI/CD Automatizado</li>
+                        </ul>
+                        <button class="btn btn--primary btn--full-width" onclick="openServiceModal('web-development')">
+                            Más Información
+                        </button>
+                    </div>
+
+                    <div class="service card">
+                        <div class="service__icon">🔧</div>
+                        <h3 class="service__title">APIs y Backend</h3>
+                        <div class="service__price">$1,500 - $3,000 MX</div>
+                        <p class="service__description">
+                            APIs REST y GraphQL escalables con NestJS, autenticación JWT y documentación 
+                            completa con Swagger.
+                        </p>
+                        <ul class="service__features">
+                            <li>✓ APIs REST/GraphQL</li>
+                            <li>✓ Autenticación JWT</li>
+                            <li>✓ Documentación Swagger</li>
+                            <li>✓ Optimización Performance</li>
+                        </ul>
+                        <button class="btn btn--primary btn--full-width" onclick="openServiceModal('api-backend')">
+                            Más Información
+                        </button>
+                    </div>
+
+                    <div class="service card">
+                        <div class="service__icon">💡</div>
+                        <h3 class="service__title">Consultoría Técnica</h3>
+                        <div class="service__price">$150 - $300 MX/hora</div>
+                        <p class="service__description">
+                            Revisión de código, arquitectura escalable, mentoring técnico y migración 
+                            de sistemas legacy.
+                        </p>
+                        <ul class="service__features">
+                            <li>✓ Code Review</li>
+                            <li>✓ Arquitectura Escalable</li>
+                            <li>✓ Mentoring Técnico</li>
+                            <li>✓ Migración Sistemas</li>
+                        </ul>
+                        <button class="btn btn--primary btn--full-width" onclick="openServiceModal('consulting')">
+                            Más Información
+                        </button>
+                    </div>
+
+                    <div class="service card">
+                        <div class="service__icon">📱</div>
+                        <h3 class="service__title">Desarrollo Móvil Kotlin</h3>
+                        <div class="service__price">$4,000 - $8,000 MX</div>
+                        <p class="service__description">
+                            Aplicaciones nativas Android con Kotlin, Material Design y deploy 
+                            en Google Play Store.
+                        </p>
+                        <ul class="service__features">
+                            <li>✓ Kotlin Nativo</li>
+                            <li>✓ Material Design</li>
+                            <li>✓ Integración APIs</li>
+                            <li>✓ Deploy Play Store</li>
+                        </ul>
+                        <button class="btn btn--primary btn--full-width" onclick="openServiceModal('mobile-development')">
+                            Más Información
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="experience" id="experiencia">
+            <div class="container">
+                <h2 class="section__title text-center">Experiencia Profesional</h2>
+                
+                <div class="timeline">
+                    <div class="timeline__item">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__content card">
+                            <div class="timeline__date">Abril 2025 - Presente</div>
+                            <h3 class="timeline__title">Fullstack Developer</h3>
+                            <h4 class="timeline__company">RoandAi</h4>
+                            <p class="timeline__description">
+                                Desarrollo de sistemas de IA, chatbots inteligentes y aplicaciones móviles 
+                                con tecnologías modernas. Implementación de soluciones de machine learning 
+                                y procesamiento de lenguaje natural.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline__item">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__content card">
+                            <div class="timeline__date">Ene 2025 - Mar 2025</div>
+                            <h3 class="timeline__title">Tech Lead & Fullstack Developer</h3>
+                            <h4 class="timeline__company">IDEASYSTEMS</h4>
+                            <p class="timeline__description">
+                                Liderazgo técnico, implementación de CI/CD y gestión de equipos de desarrollo. 
+                                Responsable de la arquitectura de software y establecimiento de mejores 
+                                prácticas de desarrollo.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section class="tech-stack">
+            <div class="container">
+                <h2 class="section__title text-center">Stack Tecnológico</h2>
+                
+                <div class="tech-grid">
+                    <div class="tech-category">
+                        <h3 class="tech-category__title">Frontend</h3>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Angular</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                    </div>
+
+                    <div class="tech-category">
+                        <h3 class="tech-category__title">Backend</h3>
+                        <div class="tech-tags">
+                            <span class="tech-tag">NestJS</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Express</span>
+                            <span class="tech-tag">PHP</span>
+                        </div>
+                    </div>
+
+                    <div class="tech-category">
+                        <h3 class="tech-category__title">Bases de Datos</h3>
+                        <div class="tech-tags">
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">MariaDB</span>
+                        </div>
+                    </div>
+
+                    <div class="tech-category">
+                        <h3 class="tech-category__title">DevOps & Móvil</h3>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Git</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">CI/CD</span>
+                            <span class="tech-tag">Kotlin</span>
+                            <span class="tech-tag">Android Studio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="section__title text-center">Lo Que Dicen Mis Clientes</h2>
+                
+                <div class="testimonials__grid">
+                    <div class="testimonial card">
+                        <div class="testimonial__content">
+                            <p class="testimonial__text">
+                                "David terminó proyectos atrasados en tiempo record. Su expertise 
+                                en NestJS y Angular fue clave para el éxito del proyecto. Altamente recomendado."
+                            </p>
+                        </div>
+                        <div class="testimonial__author">
+                            <div class="testimonial__avatar">MA</div>
+                            <div class="testimonial__info">
+                                <h4 class="testimonial__name">Manuel Arturo</h4>
+                                <p class="testimonial__position">CEO, Ideasystems</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial card">
+                        <div class="testimonial__content">
+                            <p class="testimonial__text">
+                                "La consultoría técnica de David nos ayudó a optiminar nuestros procesos de publicación de inmuebles. 
+                                Nos diseño una solución efectiva muy acorde a nuestro presupuesto."
+                            </p>
+                        </div>
+                        <div class="testimonial__author">
+                            <div class="testimonial__avatar">FS</div>
+                            <div class="testimonial__info">
+                                <h4 class="testimonial__name">Fernando Silva</h4>
+                                <p class="testimonial__position">Agente inmobiliario</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contacto">
+            <div class="container">
+                <h2 class="section__title text-center">Contacto Profesional</h2>
+                <p class="section__subtitle text-center">
+                    ¿Listo para transformar tu idea en realidad? Conversemos sobre tu proyecto
+                </p>
+
+                <div class="contact__container">
+                    <div class="contact__info">
+                        <h3>Información de Contacto</h3>
+                        <div class="contact__item">
+                            <span class="contact__icon">📧</span>
+                            <div>
+                                <strong>Email:</strong>
+                                <a href="mailto:davideer0205@gmail.com">davideer0205@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact__item">
+                            <span class="contact__icon">💼</span>
+                            <div>
+                                <strong>LinkedIn:</strong>
+                                <a href="https://linkedin.com/in/deespinosa" target="_blank">deespinosa</a>
+                            </div>
+                        </div>
+                        <div class="contact__item">
+                            <span class="contact__icon">📍</span>
+                            <div>
+                                <strong>Ubicación:</strong>
+                                <span>Orizaba, Veracruz, México</span>
+                            </div>
+                        </div>
+                        <div class="contact__item">
+                            <span class="contact__icon">🎓</span>
+                            <div>
+                                <strong>Universidad:</strong>
+                                <span>Universidad Veracruzana</span>
+                            </div>
+                        </div>
+
+                        <div class="contact__availability">
+                            <h4>Horarios de Disponibilidad</h4>
+                            <p>Lunes a Viernes: 9:00 AM - 9:00 PM (GMT-6)</p>
+                            <p>Respuesta garantizada en 24 horas</p>
+                        </div>
+                    </div>
+
+                    <form class="contact__form card" id="contact-form" novalidate>
+                        <h3>Solicitar Información</h3>
+                        
+                        <div class="form-group">
+                            <label for="name" class="form-label">Nombre Completo *</label>
+                            <input type="text" id="name" name="name" class="form-control" required aria-describedby="name-error">
+                            <div class="error-message" id="name-error"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Corporativo *</label>
+                            <input type="email" id="email" name="email" class="form-control" required aria-describedby="email-error">
+                            <div class="error-message" id="email-error"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company" class="form-label">Empresa/Organización</label>
+                            <input type="text" id="company" name="company" class="form-control" aria-describedby="company-error">
+                            <div class="error-message" id="company-error"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="project-type" class="form-label">Tipo de Proyecto *</label>
+                            <select id="project-type" name="project-type" class="form-control" required aria-describedby="project-type-error">
+                                <option value="">Seleccionar tipo de proyecto</option>
+                                <option value="web-development">Desarrollo Web Completo</option>
+                                <option value="api-backend">API y Backend</option>
+                                <option value="consulting">Consultoría Técnica</option>
+                                <option value="mobile-development">Desarrollo Móvil</option>
+                                <option value="other">Otro</option>
+                            </select>
+                            <div class="error-message" id="project-type-error"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="budget" class="form-label">Presupuesto Estimado</label>
+                            <select id="budget" name="budget" class="form-control" aria-describedby="budget-error">
+                                <option value="">Seleccionar rango de presupuesto</option>
+                                <option value="500-1000">$2,000 - $3,000 USD</option>
+                                <option value="1000-2500">$3,000 - $6,500 USD</option>
+                                <option value="2500-5000">$10,000 - $15,000 USD</option>
+                                <option value="5000+">$15,000+ USD</option>
+                                <option value="hourly">Por horas</option>
+                            </select>
+                            <div class="error-message" id="budget-error"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Descripción del Proyecto *</label>
+                            <textarea id="message" name="message" rows="4" class="form-control" required aria-describedby="message-error" 
+                                placeholder="Describe tu proyecto, objetivos, timeline y cualquier requerimiento específico..."></textarea>
+                            <div class="error-message" id="message-error"></div>
+                        </div>
+
+                        <button type="submit" class="btn btn--primary btn--lg btn--full-width">
+                            Enviar Solicitud
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__info">
+                    <h3>David Eduardo Espinosa Rojas</h3>
+                    <p>Fullstack Developer & Tech Consultant</p>
+                    <p>Transformando ideas en soluciones digitales escalables</p>
+                </div>
+
+                <div class="footer__links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#sobre-mi">Sobre Mí</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#experiencia">Experiencia</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__contact">
+                    <h4>Contacto</h4>
+                    <p>📧 davideer0205@gmail.com</p>
+                    <p>💼 linkedin.com/in/deespinosa</p>
+                    <p>📍 Orizaba, Veracruz, México</p>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p>&copy; 2025 David Eduardo Espinosa Rojas. Todos los derechos reservados.</p>
+                <p>Desarrollado con ❤️ y tecnologías modernas</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="Volver arriba">
+        ↑
+    </button>
+
+    <!-- Service Modal -->
+    <div class="modal" id="service-modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal__overlay" onclick="closeServiceModal()"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3 id="modal-title">Información del Servicio</h3>
+                <button class="modal__close" onclick="closeServiceModal()" aria-label="Cerrar modal">×</button>
+            </div>
+            <div class="modal__body" id="modal-body">
+                <!-- Content will be inserted by JavaScript -->
+            </div>
+            <div class="modal__footer">
+                <button class="btn btn--secondary" onclick="closeServiceModal()">Cerrar</button>
+                <button class="btn btn--primary" onclick="scrollToSection('contacto'); closeServiceModal();">
+                    Solicitar Información
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
