@@ -73,25 +73,36 @@ const certificates = [
         title: "Angular: De cero a Experto",
         issuer: "Udemy x DevTalles",
         year: "2025",
-        description: "Certificación completa en desarrollo con Angular"
+        description: "Certificación completa en desarrollo con Angular",
+        link: "https://www.udemy.com/certificate/UC-38b66f90-b980-4ea6-be23-a19d42a55061/"
     },
     {
         title: "Nest: Desarrollo backend escalable con Node",
         issuer: "Udemy x DevTalles",
         year: "2025",
-        description: "Desarrollo de APIs escalables con NestJS"
+        description: "Desarrollo de APIs escalables con NestJS",
+        link: "https://www.udemy.com/certificate/UC-7ecf8db7-11f2-42a9-bc17-71cb78c131df/"
     },
     {
         title: "NestJS + Testing: Pruebas unitarias y end to end (e2e)",
         issuer: "Udemy x DevTalles",
         year: "2025",
-        description: "Testing avanzado en aplicaciones NestJS"
+        description: "Testing avanzado en aplicaciones NestJS",
+        link: "https://www.udemy.com/certificate/UC-b41f5063-d10e-4c4d-ae94-3f61b9a776d4/"
     },
     {
         title: "Linux Operations and Programming",
         issuer: "Interskill IBM",
         year: "2024",
-        description: "Operaciones y programación en sistemas Linux"
+        description: "Operaciones y programación en sistemas Linux",
+        link: "https://www.credly.com/badges/caed75a7-bbd2-4710-9a4c-c0dfa162648a/linked_in_profile"
+    },
+    {
+        title: "Python for Data Science",
+        issuer: "Kaggle",
+        year: "2025",
+        description: "Fundamentos de Python para análisis de datos y machine learning.",
+        link: "https://www.kaggle.com/learn/certification/davideer/python"
     }
 ];
 
