@@ -1,113 +1,249 @@
-<!-- Profile README for David Eduardo Espinosa Rojas -->
+# CV Web Personal - David Eduardo Espinosa Rojas
 
-<h1 align="center">Hi 👋, I'm David Eduardo Espinosa Rojas</h1>
-<h3 align="center">Fullstack Developer | Software Engineering Student | NestJS & Angular Enthusiast</h3>
+Una página web profesional y moderna para mostrar tu CV, construida con HTML, CSS y JavaScript vanilla. Diseñada para ser fácil de mantener y actualizar usando arrays de datos.
 
-<p align="center">
-  <a href="mailto:davideer0205@gmail.com"><img src="https://img.shields.io/badge/Email-davideer0205@gmail.com-red?style=flat-square&logo=gmail"></a>
-  <a href="https://www.linkedin.com/in/deespinosa/"><img src="https://img.shields.io/badge/LinkedIn-deespinosa-blue?style=flat-square&logo=linkedin"></a>
-  <img src="https://img.shields.io/badge/Location-Orizaba,%20Ver,%20MX-orange?style=flat-square&logo=google-maps">
-</p>
+## 🚀 Características
+
+- **Diseño Responsivo**: Se adapta perfectamente a dispositivos móviles, tablets y escritorio
+- **Datos en Arrays**: Toda la información está organizada en arrays JavaScript para fácil mantenimiento
+- **Iconos Modernos**: Utiliza Lucide Icons para un aspecto profesional
+- **Impresión Optimizada**: Estilos especiales para impresión
+- **GitHub Pages Ready**: Listo para hospedar en GitHub Pages
+- **Carga Rápida**: Solo HTML, CSS y JavaScript vanilla - sin dependencias pesadas
+
+## 📁 Estructura de Archivos
+
+```
+cv-web/
+├── index.html          # Estructura HTML principal
+├── styles.css          # Estilos y diseño responsivo
+├── data.js            # Datos del CV organizados en arrays
+├── script.js          # Lógica JavaScript para renderizar datos
+└── README.md          # Este archivo
+```
+
+## 🛠️ Configuración para GitHub Pages
+
+1. **Crear el repositorio**:
+   ```bash
+   # Crea un nuevo repositorio en GitHub con el nombre: tu-usuario.github.io
+   # O cualquier nombre si quieres usar GitHub Pages en una branch
+   ```
+
+2. **Subir archivos**:
+   ```bash
+   git clone https://github.com/TU-USUARIO/TU-REPOSITORIO.git
+   cd TU-REPOSITORIO
+   
+   # Copia todos los archivos aquí
+   
+   git add .
+   git commit -m "Agregar CV web personal"
+   git push origin main
+   ```
+
+3. **Activar GitHub Pages**:
+   - Ve a Settings > Pages en tu repositorio
+   - Selecciona "Deploy from a branch"
+   - Elige "main" branch y "/ (root)" folder
+   - Tu CV estará disponible en: `https://TU-USUARIO.github.io/TU-REPOSITORIO`
+
+## ✏️ Personalización
+
+### Cambiar Información Personal
+
+Edita el archivo `data.js` para actualizar tu información:
+
+```javascript
+// Información personal básica
+const personalInfo = {
+    name: "Tu Nombre Completo",
+    title: "Tu Título Profesional", 
+    summary: "Tu resumen profesional aquí..."
+};
+
+// Información de contacto
+const contactInfo = [
+    {
+        icon: "phone",
+        text: "+52 123 456 7890",
+        link: "tel:+521234567890"
+    },
+    // Agregar más elementos...
+];
+```
+
+### Agregar Nueva Experiencia
+
+```javascript
+// Al inicio del array para que aparezca primero (más reciente)
+experience.unshift({
+    title: "Nuevo Puesto",
+    company: "Nueva Empresa",
+    period: "01/2026 - Actualidad",
+    description: "Descripción de responsabilidades y logros..."
+});
+```
+
+### Agregar Certificaciones
+
+```javascript
+certificates.unshift({
+    title: "Nueva Certificación",
+    issuer: "Proveedor de la Certificación",
+    year: "2026",
+    description: "Descripción opcional de la certificación"
+});
+```
+
+### Agregar Nuevas Habilidades
+
+```javascript
+skills.push({
+    category: "Nueva Tecnología",
+    icon: "code", // Icono de Lucide
+    description: "Descripción de tus competencias en esta área"
+});
+```
+
+### Iconos Disponibles
+
+Los iconos utilizan [Lucide Icons](https://lucide.dev/icons/). Algunos útiles:
+- `briefcase` - Trabajo
+- `graduation-cap` - Educación  
+- `award` - Certificaciones
+- `code` - Programación
+- `server` - Backend
+- `monitor` - Frontend
+- `database` - Bases de datos
+- `git-branch` - Control de versiones
+- `shield` - Seguridad
+- `settings` - DevOps
+
+## 🎨 Personalización de Estilos
+
+### Cambiar Colores
+
+Edita las variables CSS en `styles.css`:
+
+```css
+:root {
+    --primary-color: #2563eb;      /* Color principal */
+    --secondary-color: #64748b;    /* Color secundario */
+    --accent-color: #0ea5e9;       /* Color de acento */
+    /* Cambiar estos valores por tus colores preferidos */
+}
+```
+
+### Fuentes
+
+La página usa **Inter** de Google Fonts. Para cambiar:
+
+```html
+<!-- En index.html, cambiar esta línea: -->
+<link href="https://fonts.googleapis.com/css2?family=TU-FUENTE:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+```
+
+```css
+/* En styles.css: */
+body {
+    font-family: 'TU-FUENTE', sans-serif;
+}
+```
+
+## 🔧 Funciones JavaScript Disponibles
+
+Desde la consola del navegador puedes usar:
+
+```javascript
+// Ver todos los datos
+CVFunctions.getAllData();
+
+// Agregar nueva experiencia dinámicamente
+CVFunctions.addNewExperience({
+    title: "Nuevo Trabajo",
+    company: "Empresa",
+    period: "2026",
+    description: "Descripción..."
+});
+
+// Exportar CV como texto
+console.log(CVFunctions.exportAsText());
+
+// Imprimir CV
+CVFunctions.printCV();
+```
+
+## 📱 Responsive Design
+
+La página se adapta a diferentes tamaños:
+
+- **Móvil** (< 480px): Layout apilado, texto optimizado
+- **Tablet** (480px - 768px): Layout híbrido
+- **Escritorio** (> 768px): Layout completo con sidebar
+
+## 🖨️ Impresión
+
+- **Ctrl + P** o usar `CVFunctions.printCV()`
+- Estilos optimizados para impresión
+- Colores ajustados para impresoras
+- Saltos de página inteligentes
+
+## 🚀 Optimizaciones de Rendimiento
+
+- Sin dependencias externas pesadas
+- Carga de fuentes optimizada
+- CSS y JavaScript minimalistas
+- Imágenes (si las agregas) optimizadas
+
+## 🔒 SEO y Meta Tags
+
+Considera agregar en `index.html`:
+
+```html
+<meta name="description" content="CV de Tu Nombre - Desarrollador Full Stack">
+<meta name="keywords" content="desarrollador, full stack, javascript, tu-ubicación">
+<meta name="author" content="Tu Nombre">
+
+<!-- Open Graph para redes sociales -->
+<meta property="og:title" content="Tu Nombre - Software Developer">
+<meta property="og:description" content="Desarrollador Full Stack especializado en...">
+<meta property="og:type" content="website">
+```
+
+## 🐛 Troubleshooting
+
+### Los iconos no aparecen
+- Verifica que Lucide esté cargando correctamente
+- Revisa la consola del navegador por errores
+- Verifica que los nombres de iconos sean correctos
+
+### La página no se ve en GitHub Pages
+- Asegúrate de que `index.html` esté en la raíz del repositorio
+- Verifica que GitHub Pages esté habilitado
+- Los cambios pueden tardar algunos minutos en aplicarse
+
+### Problemas de responsive
+- Usa las herramientas de desarrollo del navegador
+- Revisa los media queries en `styles.css`
+- Prueba en diferentes dispositivos/tamaños
+
+## 📈 Próximas Mejoras Sugeridas
+
+- [ ] Modo oscuro/claro
+- [ ] Animaciones CSS
+- [ ] Sección de proyectos con enlaces a GitHub
+- [ ] Blog integrado
+- [ ] Formulario de contacto
+- [ ] Analytics (Google Analytics)
+- [ ] PWA (Progressive Web App)
+
+## 📄 Licencia
+
+Este proyecto es de uso libre. Puedes modificarlo y usarlo como desees para tu CV personal.
 
 ---
 
-## 👨‍💻 About Me
+**¡Hecho con ❤️ para impulsar tu carrera profesional!**
 
-- 🎓 **Software Engineering student** at Universidad Veracruzana (2023-2027)
-- 💻 **Fullstack Developer** passionate about building robust web applications and scalable backend systems
-- 🚀 Focused on **NestJS** & **Angular** for modern web development
-- 🛠️ Experienced in **CI/CD**, **WebSockets**, **SQL**, and **project management**
-- 🌱 Currently learning more about **AI**, **Kotlin mobile development**, and **cloud deployment**
-- 📫 How to reach me: [davideer0205@gmail.com](mailto:davideer0205@gmail.com)
-
----
-
-## 🛠️ Tech Stack
-
-**Front-end:**  
-![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat-square&logo=angular&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-
-**Back-end:**  
-![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=flat-square&logo=nestjs&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
-![Express](https://img.shields.io/badge/Express.js-000000?style=flat-square&logo=express&logoColor=white)
-![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white)
-
-**Database:**  
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
-![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=flat-square&logo=microsoft-sql-server&logoColor=white)
-![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=flat-square&logo=mariadb&logoColor=white)
-
-**Other:**  
-![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)
-![Bitbucket](https://img.shields.io/badge/Bitbucket-0052CC?style=flat-square&logo=bitbucket&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
-![WebSockets](https://img.shields.io/badge/WebSockets-010101?style=flat-square&logo=websockets&logoColor=white)
-![Kotlin](https://img.shields.io/badge/Kotlin-0095D5?style=flat-square&logo=kotlin&logoColor=white)
-![Java](https://img.shields.io/badge/Java-007396?style=flat-square&logo=java&logoColor=white)
-![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
-
----
-
-## 📚 Education
-
-- **Universidad Veracruzana**  
-  Bachelor’s Degree in Software Engineering (2023-2027)
-- **Colegio Nacional de Educación Profesional Técnica**  
-  Professional Technical Career Bachelor's Degree in Computer Science (2020-2023)
-
----
-
-## 💼 Experience
-
-- **Fullstack Developer** | RoandAi  
-  _Feb 2025 – Present_  
-  Working on AI, chatbot development, frontend, and mobile (Kotlin) applications.  
-- **Tech Lead & Fullstack Developer** | IDEASYSTEMS  
-  _Jan 2025 – Mar 2025_  
-  Led full-stack projects, managed CI/CD, and deployed scalable web applications.
-
----
-
-## 🏆 Certificates
-
-- **Nest: Desarrollo backend escalable con Node** (Udemy x DevTalles, 2025)
-- **JavaScript Algorithm And Data Structures** (FreeCodeCamp, 2024)
-- **Responsive Web Design** (FreeCodeCamp, 2024)
-- **Linux Operations and Programming** (Interskill IBM, 2024)
-
----
-
-## 🌐 Languages
-
-- **Spanish** (Native)
-- **English** (Advanced Intermediate, B2 TOEFL)
-
----
-
-## 📊 GitHub Stats
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=echodavid&show_icons=true&theme=radical" alt="GitHub Stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=echodavid&layout=compact&theme=radical" alt="Top Languages" />
-</p>
-
----
-
-## 📫 Contact
-
-- **Email:** [davideer0205@gmail.com](mailto:davideer0205@gmail.com)
-- **Phone:** +52 271 165 9841
-- **LinkedIn:** [deespinosa](https://www.linkedin.com/in/deespinosa/)
-- **Location:** Orizaba, Ver, MX
-
----
-
-<!--
-Thanks for visiting my profile! Let's connect and build something amazing together!
--->
+Para soporte o sugerencias, abre un issue en el repositorio.
