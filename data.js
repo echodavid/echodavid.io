@@ -70,6 +70,27 @@ const education = [
 // Certificaciones
 const certificates = [
     {
+        title: "Intro to Machine Learning",
+        issuer: "Kaggle",
+        year: "2025",
+        description: "Fundamentos de machine learning y sus aplicaciones.",
+        link: "https://www.kaggle.com/learn/certification/davideer/intro-to-machine-learning"
+    },
+    {
+        title: "Python for Data Science",
+        issuer: "Kaggle",
+        year: "2025",
+        description: "Fundamentos de Python para análisis de datos y machine learning.",
+        link: "https://www.kaggle.com/learn/certification/davideer/python"
+    },
+    {
+        title: "Pandas: Data Analysis with Python",
+        issuer: "Kaggle",
+        year: "2025",
+        description: "Análisis de datos con la biblioteca Pandas en Python.",
+        link: "https://www.kaggle.com/learn/certification/davideer/pandas"
+    },
+    {
         title: "Angular: De cero a Experto",
         issuer: "Udemy x DevTalles",
         year: "2025",
@@ -96,13 +117,6 @@ const certificates = [
         year: "2024",
         description: "Operaciones y programación en sistemas Linux",
         link: "https://www.credly.com/badges/caed75a7-bbd2-4710-9a4c-c0dfa162648a/linked_in_profile"
-    },
-    {
-        title: "Python for Data Science",
-        issuer: "Kaggle",
-        year: "2025",
-        description: "Fundamentos de Python para análisis de datos y machine learning.",
-        link: "https://www.kaggle.com/learn/certification/davideer/python"
     }
 ];
 
